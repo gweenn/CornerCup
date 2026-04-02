@@ -1356,7 +1356,8 @@ let unsubscribeFns = []; // realtime listeners to clean up
 function initFirebase() {
   firebase.initializeApp(FIREBASE_CONFIG);
   db = firebase.firestore();
-  db.settings({ experimentalForceLongPolling: true, merge: true });
+  // experimentalForceLongPolling helps in environments that block WebSockets (like GitHub Pages)
+  db.settings({ experimentalForceLongPolling: true });
   console.log('Firebase initialized');
 }
 
@@ -2162,41 +2163,11 @@ function confirmSale() {
   document.getElementById('confirm-modal').classList.add('open');
 }
 
-function executeSale() { executeSaleFirebase(); return; // Firebase handles everything below
-  if(false) {
-  const ings = selectedDrink.ingredients[selectedSize];
-  for (const [k, v] of Object.entries(ings)) {
-    state.stock[k] = Math.max(0, state.stock[k] - v);
-  }
-
-  state.orders.push({
-    id: Date.now().toString(),
-    drinkId: selectedDrink.id,
-    drinkName: selectedDrink.name,
-    size: selectedSize,
-    price: selectedDrink.prices[selectedSize],
-    cost: selectedDrink.costs[selectedSize],
-    profit: selectedDrink.prices[selectedSize] - selectedDrink.costs[selectedSize],
-    timestamp: (() => {
-      const useCustom = document.getElementById('use-custom-date')?.checked;
-      if (useCustom) {
-        const d = document.getElementById('sale-date')?.value;
-        const t = document.getElementById('sale-time')?.value || '12:00';
-        if (d) return new Date(d + 'T' + t + ':00').toISOString();
-      }
-      return new Date().toISOString();
-    })()
-  });
-
-  saveState();
-  closeModal('confirm-modal');
-  selectedDrink = null;
-  const cb = document.getElementById('use-custom-date');
-  if (cb) { cb.checked = false; toggleCustomDate(); }
-  renderSell();
-  updateOrderPreview();
-  } // end if(false)
+function executeSale() {
+  executeSaleFirebase();
 }
+
+
 
 function renderTodayOrders() {
   const list = document.getElementById('today-order-list');
@@ -3138,37 +3109,8 @@ function deleteCustomDrink(id) {
 // ============================================================
 // DELETE ORDER
 // ============================================================
-function deleteOrder(orderId, source) { deleteOrderFirebase(orderId, source); return;
-  if(false) {
-  const order = state.orders.find(o => o.id === orderId);
-  if (!order) { alert('Order not found.'); return; }
-
-  const timeStr = formatDateTime(order.timestamp);
-  if (!confirm(`Delete this sale?\n\n${order.drinkName} (${order.size}) — ₱${order.price}\n${timeStr}\n\nThis will restore all ingredients back to stock.`)) return;
-
-  // Restore ingredients to stock
-  const drink = getAllDrinks().find(d => d.id === order.drinkId);
-  if (drink) {
-    const ings = drink.ingredients[order.size];
-    for (const [k, v] of Object.entries(ings)) {
-      if (state.stock[k] !== undefined) {
-        state.stock[k] = (state.stock[k] || 0) + v;
-      }
-    }
-  }
-
-  // Remove the order
-  state.orders = state.orders.filter(o => o.id !== orderId);
-  saveState();
-
-  // Refresh the relevant page
-  if (source === 'sell') {
-    renderTodayOrders();
-    renderDashboard();
-  } else {
-    renderReports();
-    renderDashboard();
-  }
+function deleteOrder(orderId, source) {
+  deleteOrderFirebase(orderId, source);
 }
 
 
@@ -3176,16 +3118,27 @@ function deleteOrder(orderId, source) { deleteOrderFirebase(orderId, source); re
 // ============================================================
 // INIT
 // ============================================================
-initFirebase();
-
-// Check if already logged in this session
-const savedUser = sessionStorage.getItem('cc_user');
-if (savedUser) {
-  currentUser = JSON.parse(savedUser);
-  loadStateFromFirebase().then(() => showApp());
-} else {
-  ensureFirstAdmin();
-}
+// Wait for DOM + Firebase SDKs to fully load before doing anything
+window.addEventListener('DOMContentLoaded', function() {
+  initFirebase();
+  // Check if already logged in this session
+  const savedUser = sessionStorage.getItem('cc_user');
+  if (savedUser) {
+    try {
+      currentUser = JSON.parse(savedUser);
+      loadStateFromFirebase().then(() => showApp()).catch(err => {
+        console.error('Failed to load state:', err);
+        sessionStorage.removeItem('cc_user');
+        ensureFirstAdmin();
+      });
+    } catch(e) {
+      sessionStorage.removeItem('cc_user');
+      ensureFirstAdmin();
+    }
+  } else {
+    ensureFirstAdmin();
+  }
+});
 </script>
 </body>
 </html>
