@@ -3,9 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brew Boss — Coffee Inventory</title>
+<title>Corner Cup — Inventory</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <style>
+
   :root {
     --bg: #0f0d0b;
     --surface: #1a1714;
@@ -391,6 +395,40 @@
   .md-ings { font-size: 0.75rem; color: var(--text-dim); line-height: 1.6; }
   .md-tag { display: inline-block; padding: 1px 7px; border-radius: 4px; background: var(--accent-dim); border: 1px solid var(--accent); font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--accent2); margin-left: 6px; vertical-align: middle; }
 
+
+  /* LOGIN PAGE */
+  .login-page { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 999; flex-direction: column; gap: 0; }
+  .login-box { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 48px 40px; width: 380px; max-width: 95vw; }
+  .login-logo { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--accent2); text-align: center; margin-bottom: 4px; }
+  .login-sub { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); text-align: center; margin-bottom: 32px; }
+  .login-error { background: var(--red-dim); border: 1px solid var(--red); border-radius: 8px; padding: 10px 14px; font-size: 0.82rem; color: var(--red); margin-bottom: 16px; display: none; }
+  .login-btn { width: 100%; padding: 13px; background: var(--accent); border: none; border-radius: 8px; color: var(--bg); font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; font-weight: 600; transition: all 0.2s; margin-top: 8px; }
+  .login-btn:hover { background: var(--accent2); }
+  .login-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* USER BADGE in header */
+  .user-badge { display: flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--text-dim); }
+  .user-badge .role-tag { padding: 2px 8px; border-radius: 4px; font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+  .user-badge .role-tag.admin { background: var(--accent-dim); color: var(--accent2); border: 1px solid var(--accent); }
+  .user-badge .role-tag.cashier { background: var(--green-dim); color: var(--green); border: 1px solid var(--green); }
+  .logout-btn { background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--text-dim); font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 4px 10px; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; text-transform: uppercase; }
+  .logout-btn:hover { border-color: var(--red); color: var(--red); }
+
+  /* USERS PAGE */
+  .user-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; transition: border-color 0.2s; }
+  .user-card:hover { border-color: var(--accent); }
+  .user-card .uc-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 3px; }
+  .user-card .uc-meta { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--text-dim); }
+
+  /* CASHIER VIEW */
+  .cashier-sell-wrap { max-width: 700px; margin: 0 auto; }
+  .cashier-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 24px; }
+
+  /* SYNC STATUS */
+  .sync-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; margin-right: 5px; }
+  .sync-dot.syncing { background: var(--yellow); animation: pulse 1s infinite; }
+  .sync-dot.error { background: var(--red); }
+
   /* SCROLLBAR */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -404,26 +442,136 @@
     header { flex-direction: column; gap: 12px; }
     main { padding: 20px 16px; }
   }
+
 </style>
 </head>
 <body>
 
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" class="login-page" style="display:none;">
+  <div class="login-box">
+    <div class="login-logo">Corner Cup</div>
+    <div class="login-sub">☕ Staff Login</div>
+    <div class="login-error" id="login-error"></div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="login-username" placeholder="Enter username" autocomplete="username"
+        onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="Enter password" autocomplete="current-password"
+        onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" id="login-btn" onclick="doLogin()">Log In</button>
+  </div>
+</div>
+
+<!-- SETUP SCREEN (first time only) -->
+<div id="setup-screen" class="login-page" style="display:none;">
+  <div class="login-box">
+    <div class="login-logo">Corner Cup</div>
+    <div class="login-sub">☕ Create Admin Account</div>
+    <p style="font-size:0.82rem;color:var(--text-dim);text-align:center;margin-bottom:24px;">First time setup — create your admin account</p>
+    <div class="login-error" id="setup-error"></div>
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" id="setup-name" placeholder="e.g. Juan dela Cruz">
+    </div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="setup-username" placeholder="e.g. juan">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="setup-password" placeholder="Min 4 characters">
+    </div>
+    <button class="login-btn" id="setup-btn" onclick="doSetup()">Create Admin Account</button>
+  </div>
+</div>
+
+<!-- APP WRAPPER -->
+<div id="app-wrapper" style="display:none;">
+
+
 <header>
   <div class="logo">
-    Brew Boss
+    Corner Cup
     <span>☕ Coffee Shop Inventory</span>
   </div>
-  <nav>
-    <button class="active" onclick="showPage('dashboard')">Dashboard</button>
-    <button onclick="showPage('sell')">Sell</button>
-    <button onclick="showPage('inventory')">Inventory</button>
-    <button onclick="showPage('checker')">Checker</button>
-    <button onclick="showPage('manage')">Drinks</button>
-    <button onclick="showPage('reports')">Reports</button>
-  </nav>
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+    <nav>
+      <button class="active" onclick="showPage('dashboard')" class="admin-only">Dashboard</button>
+      <button onclick="showPage('sell')" class="admin-only">Sell</button>
+      <button onclick="showPage('inventory')" class="admin-only">Inventory</button>
+      <button onclick="showPage('checker')" class="admin-only">Checker</button>
+      <button onclick="showPage('manage')" class="admin-only">Drinks</button>
+      <button onclick="showPage('reports')" class="admin-only">Reports</button>
+      <button onclick="showPage('users')" class="admin-only">Users</button>
+    </nav>
+    <div class="user-badge" id="user-badge"></div>
+  </div>
 </header>
 
 <main>
+
+  <!-- CASHIER SELL PAGE -->
+  <div class="page" id="page-cashier-sell">
+    <div class="cashier-sell-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <div>
+          <div class="page-title">Record Sale</div>
+          <div class="page-subtitle" id="cashier-date-label">Loading...</div>
+        </div>
+      </div>
+      <div class="cashier-stats">
+        <div class="stat-card"><div class="stat-label">Today Revenue</div><div class="stat-value accent" id="c-revenue">₱0</div></div>
+        <div class="stat-card green"><div class="stat-label">Today Profit</div><div class="stat-value green" id="c-profit">₱0</div></div>
+        <div class="stat-card"><div class="stat-label">Today Orders</div><div class="stat-value" id="c-orders">0</div></div>
+      </div>
+      <div class="sell-grid">
+        <div class="sell-panel">
+          <h3>Choose Drink</h3>
+          <div class="drink-grid" id="cashier-drink-grid"></div>
+          <div style="margin-top:20px;">
+            <label>Size</label>
+            <div class="size-toggle">
+              <button class="size-btn active" id="c-btn-small" onclick="cashierSelectSize('small')">Small</button>
+              <button class="size-btn" id="c-btn-medium" onclick="cashierSelectSize('medium')">Medium</button>
+            </div>
+          </div>
+          <div class="order-preview" id="cashier-order-preview" style="display:none;">
+            <div class="order-row"><span>Drink</span><span id="c-prev-drink">—</span></div>
+            <div class="order-row"><span>Size</span><span id="c-prev-size">—</span></div>
+            <div class="order-row total"><span>Selling Price</span><span id="c-prev-price">—</span></div>
+          </div>
+          <button class="btn" style="width:100%;margin-top:16px;justify-content:center;padding:14px;" onclick="cashierConfirmSale()">
+            ☕ Record Sale
+          </button>
+        </div>
+        <div class="sell-panel">
+          <h3>Today's Orders</h3>
+          <ul class="order-list" id="cashier-order-list">
+            <div class="empty-state" style="padding:20px;"><p>No orders yet today</p></div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USERS PAGE (admin only) -->
+  <div class="page" id="page-users">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+      <div>
+        <div class="page-title">User Accounts</div>
+        <div class="page-subtitle">Manage who can access Corner Cup</div>
+      </div>
+      <button class="btn" onclick="openAddUserModal()">+ Add User</button>
+    </div>
+    <div id="users-list"></div>
+  </div>
+
 
   <!-- DASHBOARD -->
   <div class="page active" id="page-dashboard">
@@ -742,7 +890,40 @@
     <div id="manage-drinks-list"></div>
   </div>
 
+
 </main>
+
+
+<!-- ADD USER MODAL -->
+<div class="modal-overlay" id="add-user-modal">
+  <div class="modal" style="width:440px;">
+    <h2 id="add-user-title">+ Add User</h2>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="nu-name" placeholder="e.g. Maria Santos">
+    </div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="nu-username" placeholder="e.g. maria" autocomplete="off">
+    </div>
+    <div class="form-group" id="nu-password-group">
+      <label>Password</label>
+      <input type="password" id="nu-password" placeholder="Min 4 characters" autocomplete="new-password">
+    </div>
+    <div class="form-group">
+      <label>Role</label>
+      <select id="nu-role">
+        <option value="cashier">Cashier — sell only, today's view</option>
+        <option value="admin">Admin — full access</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('add-user-modal')">Cancel</button>
+      <button class="btn" id="save-user-btn" onclick="saveUser()">✓ Save User</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- RESTOCK MODAL -->
 <div class="modal-overlay" id="restock-modal">
@@ -946,18 +1127,16 @@
   </div>
 </div>
 
+
+
+
+</div><!-- end app-wrapper -->
+
+
 <script>
 // ============================================================
-// DATA LAYER
+// STATIC DATA (drinks, ingredients — never changes at runtime)
 // ============================================================
-
-const STORAGE_KEY = 'brewboss_v11';
-
-// Coffee is tracked as RAW BEANS (grams).
-// Brew ratio: 100g beans → 1200ml brewed coffee
-// So per ml brewed: 100/1200 = 0.08333g beans per ml
-// Small drink uses 80ml brewed → 80 × 0.08333 = 6.667g beans
-// Medium drink uses 120ml brewed → 120 × 0.08333 = 10g beans
 const BEANS_PER_ML = 100 / 1200; // grams of beans per ml of brewed coffee
 
 const DRINKS = [
@@ -1141,8 +1320,601 @@ function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-let state = loadState();
 
+
+// ============================================================
+// APP STATE (populated from Firebase after login)
+// ============================================================
+let state = {
+  stock: {},
+  orders: [],
+  restockLog: [],
+  customDrinks: [],
+  customIngredients: {}
+};
+
+// ============================================================
+// FIREBASE LAYER
+// ============================================================
+// ============================================================
+// FIREBASE CONFIG & INIT
+// ============================================================
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDQhnVgOZheYY-MKMJ5pMaVM1uIcPwINcU",
+  authDomain: "cornercup-727c5.firebaseapp.com",
+  projectId: "cornercup-727c5",
+  storageBucket: "cornercup-727c5.firebasestorage.app",
+  messagingSenderId: "520492903179",
+  appId: "1:520492903179:web:4f9ab6bfb5fb06505fd00e"
+};
+
+// Firebase SDK loaded via CDN scripts
+let db = null;
+let currentUser = null; // { id, name, username, role }
+let unsubscribeFns = []; // realtime listeners to clean up
+
+function initFirebase() {
+  firebase.initializeApp(FIREBASE_CONFIG);
+  db = firebase.firestore();
+  db.settings({ experimentalForceLongPolling: true, merge: true });
+  console.log('Firebase initialized');
+}
+
+// ============================================================
+// AUTH LAYER (simple username/password stored in Firestore)
+// ============================================================
+async function loginUser(username, password) {
+  const snap = await db.collection('users')
+    .where('username', '==', username.trim().toLowerCase())
+    .get();
+  if (snap.empty) return { error: 'Username not found.' };
+  const doc = snap.docs[0];
+  const user = doc.data();
+  // Simple hash compare (SHA-256 via Web Crypto)
+  const hashed = await hashPassword(password);
+  if (user.passwordHash !== hashed) return { error: 'Incorrect password.' };
+  return { ok: true, user: { id: doc.id, name: user.name, username: user.username, role: user.role } };
+}
+
+async function hashPassword(password) {
+  const msgBuffer = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function ensureFirstAdmin() {
+  // If no users exist, show setup screen
+  const snap = await db.collection('users').limit(1).get();
+  if (snap.empty) {
+    showSetupScreen();
+  } else {
+    showLoginScreen();
+  }
+}
+
+async function createUser(name, username, password, role) {
+  const existing = await db.collection('users')
+    .where('username', '==', username.trim().toLowerCase()).get();
+  if (!existing.empty) return { error: 'Username already taken.' };
+  const hashed = await hashPassword(password);
+  const ref = await db.collection('users').add({
+    name: name.trim(),
+    username: username.trim().toLowerCase(),
+    passwordHash: hashed,
+    role: role,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  return { ok: true, id: ref.id };
+}
+
+// ============================================================
+// FIREBASE STATE — replaces localStorage
+// ============================================================
+// Single Firestore document for all app state (except orders)
+// Orders are a subcollection for real-time updates
+
+async function loadStateFromFirebase() {
+  // Load main config doc
+  const configRef = db.collection('appData').doc('config');
+  const configSnap = await configRef.get();
+
+  if (!configSnap.exists) {
+    // First time — push defaults
+    const defaultConfig = {
+      stock: { ...STARTING_STOCK, matcha_g: 500, blue_g: 200, sprite_ml: 1500 },
+      restockLog: [],
+      customIngredients: {
+        matcha_g:  { name: 'Matcha Powder', unit: 'g', cost_per: 0.30, supplier: 'USJR', threshold: 50 },
+        blue_g:    { name: 'Blue Lemonade Powder', unit: 'g', cost_per: 0.60, supplier: 'USJR', threshold: 30 },
+        sprite_ml: { name: 'Sprite', unit: 'ml', cost_per: 0.05267, supplier: 'Anywhere', threshold: 500 }
+      },
+      customDrinks: [
+        {
+          id: 'matcha_latte', name: 'Matcha Latte', emoji: '🍵',
+          prices: { small: 65, medium: 75 }, costs: { small: 21.59, medium: 27.56 },
+          ingredients: {
+            small:  { matcha_g: 15, milk_ml: 100, condensed_ml: 20, ice_g: 200, small_cup: 1, lid: 1, straw: 1 },
+            medium: { matcha_g: 25, milk_ml: 130, condensed_ml: 20, ice_g: 250, medium_cup: 1, lid: 1, straw: 1 }
+          }
+        },
+        {
+          id: 'blue_lemonade', name: 'Blue Lemonade', emoji: '💙',
+          prices: { small: 49, medium: 59 }, costs: { small: 18.04, medium: 21.54 },
+          ingredients: {
+            small:  { blue_g: 3, sprite_ml: 170, ice_g: 200, small_cup: 1, lid: 1, straw: 1 },
+            medium: { blue_g: 5, sprite_ml: 200, ice_g: 250, medium_cup: 1, lid: 1, straw: 1 }
+          }
+        }
+      ]
+    };
+    await configRef.set(defaultConfig);
+    state.stock = defaultConfig.stock;
+    state.customIngredients = defaultConfig.customIngredients;
+    state.customDrinks = defaultConfig.customDrinks;
+    state.restockLog = [];
+  } else {
+    const d = configSnap.data();
+    state.stock = d.stock || {};
+    state.customIngredients = d.customIngredients || {};
+    state.customDrinks = d.customDrinks || [];
+    state.restockLog = d.restockLog || [];
+  }
+
+  // Load orders from subcollection
+  const ordersSnap = await db.collection('appData').doc('config')
+    .collection('orders').orderBy('timestamp', 'asc').get();
+  state.orders = ordersSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+  // Migrate historical orders if not yet in Firestore
+  if (state.orders.length === 0 && HISTORICAL_ORDERS.length > 0) {
+    const batch = db.batch();
+    HISTORICAL_ORDERS.forEach(o => {
+      const ref = db.collection('appData').doc('config').collection('orders').doc(o.id);
+      batch.set(ref, o);
+    });
+    await batch.commit();
+    state.orders = [...HISTORICAL_ORDERS];
+  }
+}
+
+async function saveStateToFirebase() {
+  setSyncStatus('syncing');
+  try {
+    await db.collection('appData').doc('config').set({
+      stock: state.stock,
+      customIngredients: state.customIngredients || {},
+      customDrinks: state.customDrinks || [],
+      restockLog: state.restockLog || []
+    });
+    setSyncStatus('ok');
+  } catch(e) {
+    console.error('Save error:', e);
+    setSyncStatus('error');
+  }
+}
+
+// Override saveState to use Firebase
+function saveState() {
+  saveStateToFirebase();
+}
+
+// ============================================================
+// REAL-TIME LISTENERS
+// ============================================================
+function startRealtimeListeners() {
+  // Listen for config changes (stock, drinks, ingredients)
+  const configUnsub = db.collection('appData').doc('config')
+    .onSnapshot(snap => {
+      if (!snap.exists) return;
+      const d = snap.data();
+      state.stock = d.stock || {};
+      state.customIngredients = d.customIngredients || {};
+      state.customDrinks = d.customDrinks || [];
+      state.restockLog = d.restockLog || [];
+      // Refresh current page
+      const activePage = document.querySelector('.page.active')?.id;
+      if (activePage === 'page-dashboard') renderDashboard();
+      if (activePage === 'page-inventory') { renderInventory(); renderRestockHistory(); }
+      if (activePage === 'page-cashier-sell') renderCashierSell();
+      if (activePage === 'page-sell') renderSell();
+      if (activePage === 'page-checker') renderChecker();
+    }, err => console.error('Config listener error:', err));
+
+  // Listen for new orders
+  const ordersUnsub = db.collection('appData').doc('config')
+    .collection('orders').orderBy('timestamp', 'asc')
+    .onSnapshot(snap => {
+      state.orders = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const activePage = document.querySelector('.page.active')?.id;
+      if (activePage === 'page-dashboard') renderDashboard();
+      if (activePage === 'page-reports') renderReports();
+      if (activePage === 'page-sell') renderTodayOrders();
+      if (activePage === 'page-cashier-sell') renderCashierSell();
+    }, err => console.error('Orders listener error:', err));
+
+  unsubscribeFns.push(configUnsub, ordersUnsub);
+}
+
+// Override executeSale to write order to Firestore subcollection
+async function executeSaleFirebase() {
+  const ings = selectedDrink.ingredients[selectedSize];
+  for (const [k, v] of Object.entries(ings)) {
+    state.stock[k] = Math.max(0, (state.stock[k] || 0) - v);
+  }
+
+  const useCustom = document.getElementById('use-custom-date')?.checked;
+  const customDateVal = document.getElementById('sale-date')?.value;
+  const customTimeVal = document.getElementById('sale-time')?.value || '12:00';
+  let timestamp = new Date().toISOString();
+  if (useCustom && customDateVal) {
+    timestamp = new Date(customDateVal + 'T' + customTimeVal + ':00').toISOString();
+  }
+
+  const order = {
+    drinkId: selectedDrink.id,
+    drinkName: selectedDrink.name,
+    size: selectedSize,
+    price: selectedDrink.prices[selectedSize],
+    cost: selectedDrink.costs[selectedSize],
+    profit: selectedDrink.prices[selectedSize] - selectedDrink.costs[selectedSize],
+    timestamp,
+    recordedBy: currentUser?.username || 'unknown'
+  };
+
+  setSyncStatus('syncing');
+  try {
+    // Write order to subcollection
+    await db.collection('appData').doc('config').collection('orders').add(order);
+    // Update stock in config
+    await saveStateToFirebase();
+    setSyncStatus('ok');
+  } catch(e) {
+    setSyncStatus('error');
+    alert('Failed to save sale. Check your connection.');
+    return;
+  }
+
+  closeModal('confirm-modal');
+  selectedDrink = null;
+  const cb = document.getElementById('use-custom-date');
+  if (cb) { cb.checked = false; toggleCustomDate(); }
+  renderSell();
+  updateOrderPreview();
+}
+
+// Override deleteOrder to use Firestore
+async function deleteOrderFirebase(orderId, source) {
+  const order = state.orders.find(o => o.id === orderId);
+  if (!order) { alert('Order not found.'); return; }
+  const timeStr = formatDateTime(order.timestamp);
+  if (!confirm(`Delete this sale?\n\n${order.drinkName} (${order.size}) — ₱${order.price}\n${timeStr}\n\nThis will restore all ingredients back to stock.`)) return;
+
+  // Restore ingredients
+  const drink = getAllDrinks().find(d => d.id === order.drinkId);
+  if (drink) {
+    const ings = drink.ingredients[order.size];
+    for (const [k, v] of Object.entries(ings)) {
+      if (state.stock[k] !== undefined) state.stock[k] = (state.stock[k] || 0) + v;
+    }
+  }
+
+  setSyncStatus('syncing');
+  try {
+    await db.collection('appData').doc('config').collection('orders').doc(orderId).delete();
+    await saveStateToFirebase();
+    setSyncStatus('ok');
+  } catch(e) {
+    setSyncStatus('error');
+    alert('Failed to delete. Check your connection.');
+    return;
+  }
+
+  if (source === 'sell') { renderTodayOrders(); renderDashboard(); }
+  else { renderReports(); renderDashboard(); }
+}
+
+// ============================================================
+// SYNC STATUS INDICATOR
+// ============================================================
+function setSyncStatus(status) {
+  const dot = document.getElementById('sync-dot');
+  if (!dot) return;
+  dot.className = 'sync-dot' + (status === 'syncing' ? ' syncing' : status === 'error' ? ' error' : '');
+  const label = document.getElementById('sync-label');
+  if (label) label.textContent = status === 'syncing' ? 'Saving...' : status === 'error' ? 'Error' : 'Synced';
+}
+
+// ============================================================
+// USER MANAGEMENT
+// ============================================================
+async function loadUsers() {
+  const snap = await db.collection('users').orderBy('createdAt', 'asc').get();
+  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+async function renderUsers() {
+  const el = document.getElementById('users-list');
+  if (!el) return;
+  el.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem;padding:16px 0;">Loading...</div>';
+  const users = await loadUsers();
+  if (users.length === 0) {
+    el.innerHTML = '<div class="empty-state"><p>No users found</p></div>';
+    return;
+  }
+  el.innerHTML = users.map(u => `
+    <div class="user-card">
+      <div>
+        <div class="uc-name">${u.name} ${u.id === currentUser?.id ? '<span class="md-tag">YOU</span>' : ''}</div>
+        <div class="uc-meta">@${u.username} · <span style="color:${u.role==='admin'?'var(--accent2)':'var(--green)'}">${u.role.toUpperCase()}</span></div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn secondary sm" onclick="openEditUserModal('${u.id}','${u.name}','${u.username}','${u.role}')">Edit</button>
+        ${u.id !== currentUser?.id ? `<button class="btn danger sm" onclick="deleteUser('${u.id}','${u.name}')">Delete</button>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+let editingUserId = null;
+function openAddUserModal() {
+  editingUserId = null;
+  document.getElementById('add-user-title').textContent = '+ Add User';
+  document.getElementById('save-user-btn').textContent = '✓ Save User';
+  document.getElementById('nu-name').value = '';
+  document.getElementById('nu-username').value = '';
+  document.getElementById('nu-password').value = '';
+  document.getElementById('nu-role').value = 'cashier';
+  document.getElementById('nu-username').disabled = false;
+  document.getElementById('nu-password-group').style.display = 'block';
+  document.getElementById('add-user-modal').classList.add('open');
+}
+
+function openEditUserModal(id, name, username, role) {
+  editingUserId = id;
+  document.getElementById('add-user-title').textContent = 'Edit User';
+  document.getElementById('save-user-btn').textContent = '✓ Save Changes';
+  document.getElementById('nu-name').value = name;
+  document.getElementById('nu-username').value = username;
+  document.getElementById('nu-username').disabled = true;
+  document.getElementById('nu-password').value = '';
+  document.getElementById('nu-password-group').style.display = 'block';
+  document.getElementById('nu-role').value = role;
+  document.getElementById('add-user-modal').classList.add('open');
+}
+
+async function saveUser() {
+  const name = document.getElementById('nu-name').value.trim();
+  const username = document.getElementById('nu-username').value.trim().toLowerCase();
+  const password = document.getElementById('nu-password').value;
+  const role = document.getElementById('nu-role').value;
+  if (!name) { alert('Enter a name.'); return; }
+  if (!editingUserId && !username) { alert('Enter a username.'); return; }
+  if (!editingUserId && password.length < 4) { alert('Password must be at least 4 characters.'); return; }
+
+  const btn = document.getElementById('save-user-btn');
+  btn.disabled = true; btn.textContent = 'Saving...';
+
+  if (editingUserId) {
+    const updates = { name, role };
+    if (password.length >= 4) updates.passwordHash = await hashPassword(password);
+    await db.collection('users').doc(editingUserId).update(updates);
+  } else {
+    const result = await createUser(name, username, password, role);
+    if (result.error) { alert(result.error); btn.disabled = false; btn.textContent = '✓ Save User'; return; }
+  }
+
+  btn.disabled = false;
+  closeModal('add-user-modal');
+  renderUsers();
+}
+
+async function deleteUser(id, name) {
+  if (!confirm(`Delete user "${name}"? They will no longer be able to log in.`)) return;
+  await db.collection('users').doc(id).delete();
+  renderUsers();
+}
+
+// ============================================================
+// CASHIER-SPECIFIC SELL PAGE
+// ============================================================
+let cashierSelectedDrink = null;
+let cashierSelectedSize = 'small';
+
+function renderCashierSell() {
+  const now = new Date();
+  const dateEl = document.getElementById('cashier-date-label');
+  if (dateEl) dateEl.textContent = now.toLocaleDateString('en-PH', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+
+  // Stats
+  const todayOrders = getOrdersByFilter('today');
+  const rev = todayOrders.reduce((s,o) => s + o.price, 0);
+  const prof = todayOrders.reduce((s,o) => s + o.profit, 0);
+  const el = (id) => document.getElementById(id);
+  if (el('c-revenue')) el('c-revenue').textContent = '₱' + rev.toFixed(2);
+  if (el('c-profit')) el('c-profit').textContent = '₱' + prof.toFixed(2);
+  if (el('c-orders')) el('c-orders').textContent = todayOrders.length;
+
+  // Drink grid
+  const grid = document.getElementById('cashier-drink-grid');
+  if (grid) {
+    grid.innerHTML = getAllDrinks().map(d => `
+      <button class="drink-btn ${cashierSelectedDrink?.id === d.id ? 'selected' : ''}" onclick="cashierSelectDrink('${d.id}')">
+        <div style="font-size:1.3rem;margin-bottom:6px;">${d.emoji}</div>
+        <div class="drink-name">${d.name}</div>
+        <div class="drink-price">₱${d.prices.small} / ₱${d.prices.medium}</div>
+      </button>
+    `).join('');
+  }
+
+  // Today's orders
+  const list = document.getElementById('cashier-order-list');
+  const todayRev = [...todayOrders].reverse().slice(0, 15);
+  if (list) {
+    if (todayRev.length === 0) {
+      list.innerHTML = '<div class="empty-state" style="padding:20px;"><p>No orders yet today</p></div>';
+    } else {
+      list.innerHTML = todayRev.map(o => `
+        <li class="order-item">
+          <div style="flex:1;">
+            <div class="oi-name">${o.drinkName} <span style="color:var(--text-dim);font-size:0.78rem">(${o.size})</span></div>
+            <div class="oi-time">${formatTime(o.timestamp)}</div>
+          </div>
+          <div class="oi-price">₱${o.price}</div>
+        </li>
+      `).join('');
+    }
+  }
+  updateCashierPreview();
+}
+
+function cashierSelectDrink(id) {
+  cashierSelectedDrink = getAllDrinks().find(d => d.id === id);
+  renderCashierSell();
+}
+
+function cashierSelectSize(size) {
+  cashierSelectedSize = size;
+  document.getElementById('c-btn-small').classList.toggle('active', size === 'small');
+  document.getElementById('c-btn-medium').classList.toggle('active', size === 'medium');
+  updateCashierPreview();
+}
+
+function updateCashierPreview() {
+  const preview = document.getElementById('cashier-order-preview');
+  if (!cashierSelectedDrink || !preview) return;
+  preview.style.display = 'block';
+  document.getElementById('c-prev-drink').textContent = cashierSelectedDrink.name;
+  document.getElementById('c-prev-size').textContent = cashierSelectedSize.charAt(0).toUpperCase() + cashierSelectedSize.slice(1);
+  document.getElementById('c-prev-price').textContent = '₱' + cashierSelectedDrink.prices[cashierSelectedSize];
+}
+
+async function cashierConfirmSale() {
+  if (!cashierSelectedDrink) { alert('Please select a drink first!'); return; }
+  const ings = cashierSelectedDrink.ingredients[cashierSelectedSize];
+  for (const [k, v] of Object.entries(ings)) {
+    const meta = getAllIngredients()[k];
+    if (!meta) { alert(`⚠️ Missing Ingredient!\n\n"${k}" has been deleted. Please ask admin to fix the recipe for ${cashierSelectedDrink.name}.`); return; }
+    if ((state.stock[k] || 0) < v) { alert(`Not enough ${meta.name}!\nCurrent stock: ${(state.stock[k]||0).toFixed(1)} ${meta.unit}, needed: ${v} ${meta.unit}`); return; }
+  }
+
+  const price = cashierSelectedDrink.prices[cashierSelectedSize];
+  const cost = cashierSelectedDrink.costs[cashierSelectedSize];
+  if (!confirm(`Record sale?\n\n${cashierSelectedDrink.name} (${cashierSelectedSize}) — ₱${price}`)) return;
+
+  for (const [k, v] of Object.entries(ings)) {
+    state.stock[k] = Math.max(0, (state.stock[k] || 0) - v);
+  }
+  const order = {
+    drinkId: cashierSelectedDrink.id, drinkName: cashierSelectedDrink.name,
+    size: cashierSelectedSize, price, cost, profit: price - cost,
+    timestamp: new Date().toISOString(), recordedBy: currentUser?.username || 'cashier'
+  };
+  setSyncStatus('syncing');
+  try {
+    await db.collection('appData').doc('config').collection('orders').add(order);
+    await saveStateToFirebase();
+    setSyncStatus('ok');
+  } catch(e) { setSyncStatus('error'); alert('Failed to save. Check connection.'); return; }
+  cashierSelectedDrink = null;
+  renderCashierSell();
+}
+
+// ============================================================
+// LOGIN / SETUP SCREENS
+// ============================================================
+function showLoginScreen() {
+  document.getElementById('app-wrapper').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('setup-screen').style.display = 'none';
+}
+
+function showSetupScreen() {
+  document.getElementById('app-wrapper').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('setup-screen').style.display = 'flex';
+}
+
+function showApp() {
+  document.getElementById('app-wrapper').style.display = 'block';
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('setup-screen').style.display = 'none';
+  updateHeaderForRole();
+  if (currentUser.role === 'admin') {
+    showPage('dashboard');
+  } else {
+    showPage('cashier-sell');
+  }
+  startRealtimeListeners();
+}
+
+async function doLogin() {
+  const username = document.getElementById('login-username').value.trim();
+  const password = document.getElementById('login-password').value;
+  const btn = document.getElementById('login-btn');
+  const errEl = document.getElementById('login-error');
+  if (!username || !password) { errEl.textContent = 'Please fill in all fields.'; errEl.style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = 'Logging in...';
+  errEl.style.display = 'none';
+  const result = await loginUser(username, password);
+  if (result.error) {
+    errEl.textContent = result.error; errEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Log In';
+    return;
+  }
+  currentUser = result.user;
+  sessionStorage.setItem('cc_user', JSON.stringify(currentUser));
+  await loadStateFromFirebase();
+  showApp();
+}
+
+async function doSetup() {
+  const name = document.getElementById('setup-name').value.trim();
+  const username = document.getElementById('setup-username').value.trim().toLowerCase();
+  const password = document.getElementById('setup-password').value;
+  const btn = document.getElementById('setup-btn');
+  const errEl = document.getElementById('setup-error');
+  if (!name || !username || password.length < 4) { errEl.textContent = 'Fill in all fields. Password min 4 chars.'; errEl.style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = 'Creating...';
+  const result = await createUser(name, username, password, 'admin');
+  if (result.error) { errEl.textContent = result.error; errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Create Admin Account'; return; }
+  currentUser = { id: result.id, name, username, role: 'admin' };
+  sessionStorage.setItem('cc_user', JSON.stringify(currentUser));
+  await loadStateFromFirebase();
+  showApp();
+}
+
+function doLogout() {
+  currentUser = null;
+  sessionStorage.removeItem('cc_user');
+  unsubscribeFns.forEach(fn => fn());
+  unsubscribeFns = [];
+  showLoginScreen();
+}
+
+function updateHeaderForRole() {
+  if (!currentUser) return;
+  const badge = document.getElementById('user-badge');
+  if (badge) badge.innerHTML = `
+    <span class="sync-dot" id="sync-dot"></span>
+    <span id="sync-label" style="font-size:0.62rem;color:var(--text-dim);">Synced</span>
+    &nbsp;|&nbsp;
+    <span>${currentUser.name}</span>
+    <span class="role-tag ${currentUser.role}">${currentUser.role}</span>
+    <button class="logout-btn" onclick="doLogout()">Log Out</button>
+  `;
+  // Hide admin-only nav items for cashiers
+  if (currentUser.role === 'cashier') {
+    document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
+  } else {
+    document.querySelectorAll('.admin-only').forEach(el => el.style.display = '');
+  }
+}
+
+
+
+// ============================================================
+// ALL RENDER & UI FUNCTIONS
 // ============================================================
 // UI STATE
 // ============================================================
@@ -1169,6 +1941,8 @@ function showPage(id) {
   if (id === 'sell') renderSell();
   if (id === 'checker') { renderChecker(); }
   if (id === 'manage') { renderManageDrinks(); }
+  if (id === 'users') { renderUsers(); }
+  if (id === 'cashier-sell') { renderCashierSell(); }
 }
 
 // ============================================================
@@ -1388,7 +2162,8 @@ function confirmSale() {
   document.getElementById('confirm-modal').classList.add('open');
 }
 
-function executeSale() {
+function executeSale() { executeSaleFirebase(); return; // Firebase handles everything below
+  if(false) {
   const ings = selectedDrink.ingredients[selectedSize];
   for (const [k, v] of Object.entries(ings)) {
     state.stock[k] = Math.max(0, state.stock[k] - v);
@@ -1416,11 +2191,11 @@ function executeSale() {
   saveState();
   closeModal('confirm-modal');
   selectedDrink = null;
-  // Reset custom date
   const cb = document.getElementById('use-custom-date');
   if (cb) { cb.checked = false; toggleCustomDate(); }
   renderSell();
   updateOrderPreview();
+  } // end if(false)
 }
 
 function renderTodayOrders() {
@@ -2363,7 +3138,8 @@ function deleteCustomDrink(id) {
 // ============================================================
 // DELETE ORDER
 // ============================================================
-function deleteOrder(orderId, source) {
+function deleteOrder(orderId, source) { deleteOrderFirebase(orderId, source); return;
+  if(false) {
   const order = state.orders.find(o => o.id === orderId);
   if (!order) { alert('Order not found.'); return; }
 
@@ -2395,11 +3171,21 @@ function deleteOrder(orderId, source) {
   }
 }
 
+
+
 // ============================================================
 // INIT
 // ============================================================
-renderDashboard();
-renderSell();
+initFirebase();
+
+// Check if already logged in this session
+const savedUser = sessionStorage.getItem('cc_user');
+if (savedUser) {
+  currentUser = JSON.parse(savedUser);
+  loadStateFromFirebase().then(() => showApp());
+} else {
+  ensureFirstAdmin();
+}
 </script>
 </body>
 </html>
