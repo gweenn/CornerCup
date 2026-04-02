@@ -1139,8 +1139,6 @@
 // ============================================================
 const BEANS_PER_ML = 100 / 1200; // grams of beans per ml of brewed coffee
 
-const STORAGE_KEY = 'cornercup_state';
-
 const DRINKS = [
   {
     id: 'americano', name: 'Americano', emoji: '☕',
@@ -3143,7 +3141,6 @@ function deleteCustomDrink(id) {
 function deleteOrder(orderId, source) { deleteOrderFirebase(orderId, source); return;
   if(false) {
   const order = state.orders.find(o => o.id === orderId);
-  }
   if (!order) { alert('Order not found.'); return; }
 
   const timeStr = formatDateTime(order.timestamp);
