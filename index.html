@@ -429,6 +429,86 @@
   .sync-dot.syncing { background: var(--yellow); animation: pulse 1s infinite; }
   .sync-dot.error { background: var(--red); }
 
+
+  /* RECEIPT STYLES */
+  .pos-layout { display: grid; grid-template-columns: 1fr 380px; gap: 20px; align-items: start; }
+  .menu-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+  .menu-panel h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--accent2); margin-bottom: 16px; }
+  .menu-drink-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; cursor: pointer; text-align: left; transition: all 0.18s; color: var(--text); width: 100%; }
+  .menu-drink-btn:hover { border-color: var(--accent); background: var(--accent-dim); }
+  .menu-drink-btn .mdb-emoji { font-size: 1.4rem; margin-bottom: 4px; }
+  .menu-drink-btn .mdb-name { font-size: 0.85rem; font-weight: 600; margin-bottom: 2px; }
+  .menu-drink-btn .mdb-price { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent2); }
+
+  /* SIZE QUICK TOGGLE on menu card */
+  .size-quick { display: flex; gap: 4px; margin-top: 8px; }
+  .size-quick-btn { flex: 1; padding: 4px 6px; border-radius: 5px; font-family: 'DM Mono', monospace; font-size: 0.62rem; border: 1px solid var(--border); background: none; color: var(--text-dim); cursor: pointer; transition: all 0.15s; letter-spacing: 0.5px; }
+  .size-quick-btn:hover { border-color: var(--accent); color: var(--accent2); background: var(--accent-dim); }
+
+  /* RECEIPT PANEL */
+  .receipt-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 0; position: sticky; top: 80px; overflow: hidden; }
+  .receipt-header { background: var(--surface2); padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .receipt-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--accent2); margin-bottom: 10px; }
+  .receipt-customer { display: flex; gap: 8px; align-items: center; }
+  .receipt-customer input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 8px 12px; color: var(--text); font-size: 0.85rem; font-family: 'DM Sans', sans-serif; }
+  .receipt-customer input:focus { outline: none; border-color: var(--accent); }
+
+  .receipt-items { padding: 12px 20px; min-height: 180px; max-height: 340px; overflow-y: auto; }
+  .receipt-empty { text-align: center; padding: 32px 0; color: var(--text-faint); font-size: 0.82rem; font-family: 'DM Mono', monospace; }
+
+  .receipt-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--border); }
+  .receipt-item:last-child { border-bottom: none; }
+  .ri-qty { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--text-dim); width: 28px; flex-shrink: 0; }
+  .ri-name { flex: 1; font-size: 0.85rem; }
+  .ri-size { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--text-dim); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; margin-left: 4px; }
+  .ri-price { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--accent2); flex-shrink: 0; }
+  .ri-remove { background: none; border: none; color: var(--text-faint); cursor: pointer; font-size: 1rem; padding: 0 2px; transition: color 0.15s; flex-shrink: 0; }
+  .ri-remove:hover { color: var(--red); }
+  /* Qty controls */
+  .ri-qty-ctrl { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+  .ri-qty-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; color: var(--text-dim); font-size: 0.75rem; width: 20px; height: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .ri-qty-btn:hover { border-color: var(--accent); color: var(--accent2); }
+  .ri-qty-num { font-family: 'DM Mono', monospace; font-size: 0.78rem; width: 22px; text-align: center; }
+
+  .receipt-divider { border: none; border-top: 1px solid var(--border); margin: 0 20px; }
+  .receipt-totals { padding: 12px 20px; }
+  .receipt-total-row { display: flex; justify-content: space-between; font-size: 0.82rem; padding: 3px 0; color: var(--text-dim); font-family: 'DM Mono', monospace; }
+  .receipt-total-row.grand { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text); padding-top: 8px; border-top: 1px solid var(--border); margin-top: 6px; }
+  .receipt-total-row.profit-row { color: var(--green); font-size: 0.75rem; }
+
+  .receipt-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
+
+  /* PAST DATE SECTION */
+  .past-date-section { margin-top: 8px; }
+  .past-date-toggle { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+  .past-date-toggle input { width: auto; cursor: pointer; }
+  .past-date-toggle label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); cursor: pointer; margin: 0; }
+
+  /* ORDER LOG GROUPED */
+  .order-group { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+  .order-group-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: var(--surface2); border-bottom: 1px solid var(--border); cursor: pointer; }
+  .og-customer { font-weight: 600; font-size: 0.88rem; }
+  .og-meta { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--text-dim); margin-top: 2px; }
+  .og-total { font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--accent2); }
+  .og-items { padding: 4px 0; }
+  .og-item-row { display: flex; align-items: center; padding: 7px 16px; border-bottom: 1px solid var(--border); font-size: 0.83rem; gap: 8px; }
+  .og-item-row:last-child { border-bottom: none; }
+
+  @media (max-width: 900px) {
+    .pos-layout { grid-template-columns: 1fr; }
+    .receipt-panel { position: static; }
+  }
+
+
+  /* DRINK DETAIL MODAL */
+  .ing-detail-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+  .ing-detail-row:last-child { border-bottom: none; }
+  .ing-detail-name { color: var(--text); }
+  .ing-detail-amount { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--accent2); }
+  .ing-detail-stock { font-family: 'DM Mono', monospace; font-size: 0.72rem; }
+  .modal-add-btns { display: flex; gap: 10px; margin-top: 20px; }
+  .modal-add-btns .btn { flex: 1; justify-content: center; }
+
   /* SCROLLBAR */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -508,6 +588,8 @@
       <button onclick="showPage('checker')" class="admin-only">Checker</button>
       <button onclick="showPage('manage')" class="admin-only">Drinks</button>
       <button onclick="showPage('reports')" class="admin-only">Reports</button>
+      <button onclick="showPage('expenses')" class="admin-only">Expenses</button>
+      <button onclick="showPage('testing')" class="admin-only">Testing</button>
       <button onclick="showPage('users')" class="admin-only">Users</button>
     </nav>
     <div class="user-badge" id="user-badge"></div>
@@ -610,7 +692,7 @@
         </div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Drink</th><th>Size</th><th>Price</th><th>Time</th><th></th></tr></thead>
+            <thead><tr><th>Drink</th><th>Size</th><th>Price</th><th>Time</th><th>By</th><th></th></tr></thead>
             <tbody id="recent-orders-tbody">
               <tr><td colspan="4"><div class="empty-state"><div class="empty-icon">☕</div><p>No orders yet today</p></div></td></tr>
             </tbody>
@@ -679,75 +761,154 @@
   </div>
 
   <!-- SELL -->
+  <!-- SELL PAGE — Receipt Style POS -->
   <div class="page" id="page-sell">
-    <div class="page-title">Record a Sale</div>
-    <div class="page-subtitle">Select a drink and size to deduct ingredients and log the sale</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div>
+        <div class="page-title">New Order</div>
+        <div class="page-subtitle" id="sell-date-label"></div>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);">
+        <span id="sell-today-count">0</span> orders today &nbsp;·&nbsp; <span id="sell-today-revenue" style="color:var(--accent2);">₱0</span>
+      </div>
+    </div>
 
-    <div class="sell-grid">
-      <div class="sell-panel">
-        <h3>Choose Drink</h3>
-        <div class="drink-grid" id="drink-grid"></div>
+    <div class="pos-layout">
+      <!-- LEFT: MENU -->
+      <div class="menu-panel">
+        <h3>Menu</h3>
+        <div class="drink-grid" id="pos-drink-grid"></div>
+      </div>
 
-        <div style="margin-top:20px;">
-          <label>Size</label>
-          <div class="size-toggle">
-            <button class="size-btn active" id="btn-small" onclick="selectSize('small')">Small</button>
-            <button class="size-btn" id="btn-medium" onclick="selectSize('medium')">Medium</button>
+      <!-- RIGHT: RECEIPT -->
+      <div class="receipt-panel">
+        <div class="receipt-header">
+          <div class="receipt-title">🧾 Current Order</div>
+          <div class="receipt-customer">
+            <input type="text" id="customer-name" placeholder="Customer name (optional)" maxlength="40">
           </div>
         </div>
 
-        <div class="order-preview" id="order-preview" style="display:none;">
-          <div class="order-row"><span>Drink</span><span id="prev-drink">—</span></div>
-          <div class="order-row"><span>Size</span><span id="prev-size">—</span></div>
-          <div class="order-row"><span>Cost to Make</span><span id="prev-cost">—</span></div>
-          <div class="order-row total"><span>Selling Price</span><span id="prev-price">—</span></div>
-          <div class="order-row profit"><span>Profit</span><span id="prev-profit">—</span></div>
+        <div class="receipt-items" id="receipt-items">
+          <div class="receipt-empty" id="receipt-empty">No items yet.<br>Tap a drink to add it.</div>
         </div>
 
-        <button class="btn" style="width:100%;margin-top:16px;justify-content:center;padding:14px;" onclick="confirmSale()">
-          ☕ Record Sale
-        </button>
+        <hr class="receipt-divider">
 
-        <!-- Past date recording -->
-        <div style="margin-top:12px;">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <input type="checkbox" id="use-custom-date" onchange="toggleCustomDate()" style="width:auto;cursor:pointer;">
-            <label for="use-custom-date" style="font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);cursor:pointer;margin:0;">Recording a past sale?</label>
+        <div class="receipt-totals" id="receipt-totals" style="display:none;">
+          <div class="receipt-total-row"><span>Subtotal</span><span id="r-subtotal">₱0</span></div>
+          <div class="receipt-total-row"><span>Items</span><span id="r-items">0</span></div>
+          <div class="receipt-total-row profit-row"><span>Est. Profit</span><span id="r-profit">₱0</span></div>
+          <div class="receipt-total-row grand"><span>TOTAL</span><span id="r-total">₱0</span></div>
+        </div>
+
+        <div class="receipt-footer">
+          <div style="display:flex;gap:8px;">
+            <button class="btn" id="place-order-btn" onclick="placeOrder()" style="flex:1;justify-content:center;padding:13px;font-size:0.78rem;" disabled>
+              ☕ Place Order
+            </button>
+            <button class="btn secondary" id="calc-btn" onclick="openCalc()" title="Change Calculator"
+              style="padding:13px 14px;font-size:1rem;" disabled>
+              🧮
+            </button>
           </div>
-          <div id="custom-date-row" style="display:none;gap:8px;flex-direction:column;">
-            <div style="background:var(--yellow-dim);border:1px solid var(--yellow);border-radius:8px;padding:8px 12px;font-size:0.78rem;color:var(--yellow);">
-              ⚠️ Stock will still be deducted from current inventory
+          <button class="btn secondary" onclick="clearOrder()" style="justify-content:center;padding:8px;font-size:0.68rem;">
+            🗑 Clear Order
+          </button>
+
+          <!-- Past date recording -->
+          <div class="past-date-section">
+            <div class="past-date-toggle">
+              <input type="checkbox" id="use-custom-date" onchange="toggleCustomDate()">
+              <label for="use-custom-date">Recording a past sale?</label>
             </div>
-            <div class="form-row" style="margin:0;">
-              <div class="form-group" style="margin:0;">
-                <label>Date</label>
-                <input type="date" id="sale-date" style="width:100%;">
+            <div id="custom-date-row" style="display:none;margin-top:8px;gap:6px;flex-direction:column;">
+              <div style="background:var(--yellow-dim);border:1px solid var(--yellow);border-radius:7px;padding:7px 11px;font-size:0.75rem;color:var(--yellow);">
+                ⚠️ Stock deducted from current inventory
               </div>
-              <div class="form-group" style="margin:0;">
-                <label>Time</label>
-                <input type="time" id="sale-time" style="width:100%;" value="12:00">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                <div><label style="font-size:0.65rem;">Date</label><input type="date" id="sale-date" style="width:100%;"></div>
+                <div><label style="font-size:0.65rem;">Time</label><input type="time" id="sale-time" style="width:100%;" value="12:00"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="sell-panel">
-        <h3>Ingredients Used</h3>
-        <div id="ingredients-preview">
-          <div class="empty-state" style="padding:32px;">
-            <div class="empty-icon">👆</div>
-            <p>Select a drink to see ingredients</p>
+    <!-- TODAY'S ORDERS (grouped) -->
+    <div style="margin-top:28px;">
+      <div class="section-header">
+        <div class="section-title">Today's Orders</div>
+        <div id="today-summary" style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);"></div>
+      </div>
+      <div id="today-orders-grouped"></div>
+    </div>
+  </div>
+
+
+  <!-- TESTING PAGE -->
+  <div class="page" id="page-testing">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div>
+        <div class="page-title">Testing Mode</div>
+        <div class="page-subtitle">Record test drinks — ingredients deducted, no revenue or profit counted</div>
+      </div>
+      <div style="background:var(--yellow-dim);border:1px solid var(--yellow);border-radius:8px;padding:8px 16px;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--yellow);">
+        ⚠️ TEST MODE — No revenue recorded
+      </div>
+    </div>
+
+    <div class="pos-layout">
+      <!-- LEFT: MENU -->
+      <div class="menu-panel">
+        <h3>Menu</h3>
+        <div class="drink-grid" id="test-drink-grid"></div>
+      </div>
+
+      <!-- RIGHT: TEST RECEIPT -->
+      <div class="receipt-panel">
+        <div class="receipt-header">
+          <div class="receipt-title" style="color:var(--yellow);">🧪 Test Order</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--text-dim);margin-top:6px;">
+            Who is testing?
+          </div>
+          <div class="receipt-customer" style="margin-top:6px;">
+            <input type="text" id="tester-name" placeholder="Tester name (optional)" maxlength="40">
           </div>
         </div>
 
-        <div style="margin-top:24px;">
-          <h3>Today's Orders</h3>
-          <ul class="order-list" id="today-order-list">
-            <div class="empty-state" style="padding:20px;"><p>No orders yet today</p></div>
-          </ul>
+        <div class="receipt-items" id="test-receipt-items">
+          <div class="receipt-empty" id="test-receipt-empty">No items yet.<br>Tap a drink to add it.</div>
+        </div>
+
+        <hr class="receipt-divider">
+
+        <div class="receipt-totals" id="test-receipt-totals" style="display:none;">
+          <div class="receipt-total-row"><span>Items</span><span id="t-items">0</span></div>
+          <div class="receipt-total-row" style="color:var(--yellow);"><span>Ingredient Cost</span><span id="t-cost">₱0</span></div>
+          <div class="receipt-total-row grand" style="color:var(--yellow);font-size:1rem;"><span>TOTAL COST</span><span id="t-total">₱0</span></div>
+        </div>
+
+        <div class="receipt-footer">
+          <button class="btn" id="place-test-btn" onclick="placeTestOrder()"
+            style="justify-content:center;padding:13px;font-size:0.78rem;border-color:var(--yellow);background:var(--yellow-dim);color:var(--yellow);" disabled>
+            🧪 Record Test
+          </button>
+          <button class="btn secondary" onclick="clearTestOrder()" style="justify-content:center;padding:8px;font-size:0.68rem;">
+            🗑 Clear
+          </button>
         </div>
       </div>
+    </div>
+
+    <!-- TEST LOG -->
+    <div style="margin-top:28px;">
+      <div class="section-header">
+        <div class="section-title">Test Log</div>
+        <div id="test-log-summary" style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);"></div>
+      </div>
+      <div id="test-log-list"></div>
     </div>
   </div>
 
@@ -764,12 +925,26 @@
       </div>
     </div>
 
-    <div class="filter-bar">
-      <input type="text" placeholder="Search ingredient..." id="inv-search" oninput="renderInventory()">
-      <button class="filter-chip active" onclick="setFilter('all',this)">All</button>
-      <button class="filter-chip" onclick="setFilter('ok',this)">OK</button>
-      <button class="filter-chip" onclick="setFilter('low',this)">Low</button>
-      <button class="filter-chip" onclick="setFilter('critical',this)">Critical</button>
+    <div class="filter-bar" style="flex-direction:column;align-items:flex-start;gap:10px;">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;width:100%;">
+        <input type="text" placeholder="Search ingredient..." id="inv-search" oninput="renderInventory()" style="max-width:240px;">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+          <span style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);">Status:</span>
+          <button class="filter-chip active" id="fc-all" onclick="setFilter('all',this)">All</button>
+          <button class="filter-chip" id="fc-ok" onclick="setFilter('ok',this)">OK</button>
+          <button class="filter-chip" id="fc-low" onclick="setFilter('low',this)">Low</button>
+          <button class="filter-chip" id="fc-critical" onclick="setFilter('critical',this)">Critical</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+        <span style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);">Category:</span>
+        <button class="filter-chip active" id="cat-all" onclick="setCategoryFilter('all',this)">All</button>
+        <button class="filter-chip" id="cat-main" onclick="setCategoryFilter('main',this)">☕ Main</button>
+        <button class="filter-chip" id="cat-syrups" onclick="setCategoryFilter('syrups',this)">🍮 Syrups</button>
+        <button class="filter-chip" id="cat-powders" onclick="setCategoryFilter('powders',this)">🧪 Powders</button>
+        <button class="filter-chip" id="cat-packaging" onclick="setCategoryFilter('packaging',this)">📦 Packaging</button>
+        <button class="filter-chip" id="cat-other" onclick="setCategoryFilter('other',this)">• Other</button>
+      </div>
     </div>
 
     <div class="inv-grid" id="inv-grid"></div>
@@ -831,6 +1006,7 @@
       <div class="stat-card">
         <div class="stat-label">Orders</div>
         <div class="stat-value" id="rep-orders">0</div>
+        <div class="stat-sub" id="rep-items">0 items</div>
       </div>
     </div>
 
@@ -868,14 +1044,93 @@
         <button onclick="setDrinkFilter('all', document.querySelector('.drink-filter-chip'))" style="margin-left:auto;background:none;border:1px solid var(--accent);border-radius:6px;padding:3px 10px;color:var(--accent2);font-family:'DM Mono',monospace;font-size:0.65rem;cursor:pointer;letter-spacing:1px;">✕ CLEAR</button>
       </div>
       <!-- Log summary line -->
-      <div id="log-summary" style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);margin-bottom:10px;"></div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Date & Time</th><th>Drink</th><th>Size</th><th>Revenue</th><th>Cost</th><th>Profit</th><th></th></tr></thead>
-          <tbody id="report-tbody"></tbody>
-        </table>
+      <div id="log-summary" style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);margin-bottom:12px;"></div>
+      <!-- Grouped order log -->
+      <div id="report-orders-grouped"></div>
+    </div>
+  </div>
+
+
+  <!-- EXPENSES PAGE -->
+  <div class="page" id="page-expenses">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+      <div>
+        <div class="page-title">Expenses</div>
+        <div class="page-subtitle">Track spending to calculate true net profit</div>
+      </div>
+      <button class="btn" onclick="openAddExpenseModal()">+ Log Expense</button>
+    </div>
+
+    <!-- Expense summary stats — All Time -->
+    <div style="font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:10px;">All Time Summary</div>
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px;">
+      <div class="stat-card">
+        <div class="stat-label">Revenue</div>
+        <div class="stat-value accent" id="exp-revenue">₱0</div>
+        <div class="stat-sub">all sales</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">COGS</div>
+        <div class="stat-value" id="exp-cogs">₱0</div>
+        <div class="stat-sub">ingredient cost of drinks sold</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Gross Profit</div>
+        <div class="stat-value green" id="exp-gross">₱0</div>
+        <div class="stat-sub">Revenue − COGS</div>
       </div>
     </div>
+
+    <!-- COGS Fund Card — highlighted -->
+    <div id="exp-fund-card" style="background:var(--surface);border:2px solid var(--accent);border-radius:12px;padding:18px 24px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:6px;">COGS Fund Balance</div>
+        <div style="font-size:0.82rem;color:var(--text-dim);">Available to spend on restocking = COGS − Restock Spending</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;" id="exp-fund-balance">₱0</div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--text-dim);" id="exp-fund-sub"></div>
+      </div>
+    </div>
+
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px;">
+      <div class="stat-card red">
+        <div class="stat-label">Restock Spending</div>
+        <div class="stat-value" style="color:var(--red)" id="exp-restock-total">₱0</div>
+        <div class="stat-sub">from COGS fund</div>
+      </div>
+      <div class="stat-card yellow">
+        <div class="stat-label">Capital Expenses</div>
+        <div class="stat-value" style="color:var(--yellow)" id="exp-capital-total">₱0</div>
+        <div class="stat-sub">from profit</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Net Profit</div>
+        <div class="stat-value green" id="exp-net">₱0</div>
+        <div class="stat-sub">Gross Profit − Capital</div>
+      </div>
+    </div>
+
+    <!-- Category filter -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px;">
+      <span style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);">Category:</span>
+      <button class="filter-chip active" id="exp-cat-all" onclick="setExpenseFilter('all',this)">All</button>
+      <button class="filter-chip" id="exp-cat-restock" onclick="setExpenseFilter('restock',this)">🛒 Restock</button>
+      <button class="filter-chip" id="exp-cat-equipment" onclick="setExpenseFilter('equipment',this)">🔧 Equipment</button>
+      <button class="filter-chip" id="exp-cat-utilities" onclick="setExpenseFilter('utilities',this)">💡 Utilities</button>
+      <button class="filter-chip" id="exp-cat-rent" onclick="setExpenseFilter('rent',this)">🏠 Rent</button>
+      <button class="filter-chip" id="exp-cat-other" onclick="setExpenseFilter('other',this)">• Other</button>
+    </div>
+
+    <!-- Date filter for expenses -->
+    <div class="date-filter" style="margin-bottom:20px;">
+      <button class="date-chip active" onclick="setExpenseDateFilter('month',this)">This Month</button>
+      <button class="date-chip" onclick="setExpenseDateFilter('last_month',this)">Last Month</button>
+      <button class="date-chip" onclick="setExpenseDateFilter('week',this)">This Week</button>
+      <button class="date-chip" onclick="setExpenseDateFilter('all',this)">All Time</button>
+    </div>
+
+    <div id="expense-log-list"></div>
   </div>
 
   <!-- MANAGE DRINKS PAGE -->
@@ -925,23 +1180,194 @@
 </div>
 
 
+
+<!-- DRINK DETAIL MODAL -->
+<div class="modal-overlay" id="drink-detail-modal">
+  <div class="modal" style="width:500px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">
+      <span id="dd-emoji" style="font-size:2rem;"></span>
+      <div>
+        <h2 id="dd-name" style="margin:0;"></h2>
+        <div id="dd-prices" style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--accent2);margin-top:2px;"></div>
+      </div>
+    </div>
+
+    <!-- Size tabs -->
+    <div style="display:flex;gap:8px;margin:16px 0 12px;">
+      <button class="size-btn active" id="dd-tab-small" onclick="showDDSize('small')">Small</button>
+      <button class="size-btn" id="dd-tab-medium" onclick="showDDSize('medium')">Medium</button>
+    </div>
+
+    <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;">Ingredients</div>
+    <div id="dd-ingredients"></div>
+
+    <div id="dd-cost-row" style="display:flex;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;">Cost to Make</div>
+        <div id="dd-cost" style="font-family:'DM Mono',monospace;font-size:1rem;color:var(--red);margin-top:2px;"></div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;">Profit per Cup</div>
+        <div id="dd-profit" style="font-family:'DM Mono',monospace;font-size:1rem;color:var(--green);margin-top:2px;"></div>
+      </div>
+    </div>
+
+    <div class="modal-add-btns">
+      <button class="btn secondary" onclick="closeModal('drink-detail-modal')">Close</button>
+      <button class="btn" onclick="addToOrderFromModal('small')">+ Add Small</button>
+      <button class="btn" onclick="addToOrderFromModal('medium')">+ Add Medium</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKER DETAIL MODAL -->
+<div class="modal-overlay" id="checker-detail-modal">
+  <div class="modal" style="width:520px;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <span id="cd-emoji" style="font-size:2rem;"></span>
+      <div>
+        <h2 id="cd-name" style="margin:0;"></h2>
+        <div id="cd-status-badge" style="margin-top:4px;"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <button class="size-btn active" id="cd-tab-small" onclick="showCDSize('small')">Small</button>
+      <button class="size-btn" id="cd-tab-medium" onclick="showCDSize('medium')">Medium</button>
+    </div>
+
+    <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;">Ingredient Check</div>
+    <div id="cd-ingredients"></div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;">Max Cups (this size)</div>
+        <div id="cd-max" style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--text);margin-top:2px;"></div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase;">Selling Price</div>
+        <div id="cd-price" style="font-family:'DM Mono',monospace;font-size:1rem;color:var(--accent2);margin-top:2px;"></div>
+      </div>
+    </div>
+
+    <div class="modal-actions" style="margin-top:16px;">
+      <button class="btn secondary" onclick="closeModal('checker-detail-modal')">Close</button>
+      <button class="btn" onclick="closeModal('checker-detail-modal');showPage('sell');">Go to Sell</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- CHANGE CALCULATOR MODAL -->
+<div class="modal-overlay" id="calc-modal">
+  <div class="modal" style="width:360px;">
+    <h2 style="margin-bottom:4px;">💰 Change Calculator</h2>
+    <div id="calc-order-total" style="font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--text-dim);margin-bottom:20px;"></div>
+
+    <div class="form-group">
+      <label>Amount Paid by Customer (₱)</label>
+      <input type="number" id="calc-paid" placeholder="e.g. 200" min="0" step="1"
+        oninput="calcChange()" style="font-size:1.2rem;text-align:center;">
+    </div>
+
+    <!-- Quick cash buttons -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:16px;">
+      <button class="btn secondary sm" onclick="setCalcPaid(20)">₱20</button>
+      <button class="btn secondary sm" onclick="setCalcPaid(50)">₱50</button>
+      <button class="btn secondary sm" onclick="setCalcPaid(100)">₱100</button>
+      <button class="btn secondary sm" onclick="setCalcPaid(200)">₱200</button>
+      <button class="btn secondary sm" onclick="setCalcPaid(500)">₱500</button>
+      <button class="btn secondary sm" onclick="setCalcPaid(1000)">₱1000</button>
+    </div>
+
+    <div id="calc-result" style="display:none;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:16px;text-align:center;">
+      <div style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;">Change</div>
+      <div id="calc-change-amount" style="font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;"></div>
+    </div>
+    <div id="calc-short" style="display:none;background:var(--red-dim);border:1px solid var(--red);border-radius:10px;padding:12px 20px;margin-bottom:16px;text-align:center;font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--red);">
+      ⚠️ Not enough — short by <span id="calc-short-amount"></span>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('calc-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ADD EXPENSE MODAL -->
+<div class="modal-overlay" id="add-expense-modal">
+  <div class="modal" style="width:460px;">
+    <h2 id="exp-modal-title">+ Log Expense</h2>
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" id="exp-desc" placeholder="e.g. Bought 2kg coffee beans, New blender">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Amount (₱)</label>
+        <input type="number" id="exp-amount" placeholder="e.g. 839" min="0" step="any">
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <select id="exp-category" onchange="updateExpDeductHint()">
+          <option value="restock">🛒 Restock (ingredients/supplies)</option>
+          <option value="equipment">🔧 Equipment / Upgrade</option>
+          <option value="utilities">💡 Utilities (electricity, water)</option>
+          <option value="rent">🏠 Rent</option>
+          <option value="other">• Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Deduct From</label>
+      <select id="exp-deduct-from" onchange="updateExpDeductHint()">
+        <option value="cost">COGS Fund (restocks &amp; supplies)</option>
+        <option value="profit">Gross Profit (equipment, upgrades, rent)</option>
+      </select>
+    </div>
+    <div id="exp-deduct-hint" style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);margin-top:-10px;margin-bottom:12px;"></div>
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" id="exp-date">
+    </div>
+    <div class="form-group">
+      <label>Notes (optional)</label>
+      <input type="text" id="exp-notes" placeholder="Additional details...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn secondary" onclick="closeModal('add-expense-modal')">Cancel</button>
+      <button class="btn" onclick="saveExpense()">✓ Save Expense</button>
+    </div>
+  </div>
+</div>
+
 <!-- RESTOCK MODAL -->
 <div class="modal-overlay" id="restock-modal">
   <div class="modal">
     <h2>Restock Ingredient</h2>
     <div class="form-group">
       <label>Ingredient</label>
-      <select id="restock-ing"></select>
+      <select id="restock-ing" onchange="updateRestockUnit()"></select>
     </div>
     <div class="form-row">
       <div class="form-group">
-        <label>Add Quantity</label>
-        <input type="number" id="restock-qty" placeholder="e.g. 1000" min="0">
+        <label>Quantity Added</label>
+        <input type="number" id="restock-qty" placeholder="e.g. 1000" min="0" oninput="updateRestockCostHint()">
       </div>
       <div class="form-group">
         <label>Unit</label>
         <input type="text" id="restock-unit-display" disabled>
       </div>
+    </div>
+    <div class="form-group">
+      <label>Total Price Paid (₱)</label>
+      <input type="number" id="restock-price-paid" placeholder="e.g. 450" min="0" step="any"
+        oninput="updateRestockCostHint()">
+    </div>
+    <div id="restock-cost-hint" style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim);margin-top:-10px;margin-bottom:12px;"></div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:0.82rem;color:var(--text-dim);">
+      💡 This will be logged as a <strong style="color:var(--accent2);">Restock Expense</strong> and deducted from Total Cost.
     </div>
     <div class="modal-actions">
       <button class="btn secondary" onclick="closeModal('restock-modal')">Cancel</button>
@@ -1208,6 +1634,35 @@ const ING_META = {
   straw:         { name: 'Straws', unit: 'pcs', cost_per: 0.45, supplier: 'Chefs & Bakers', threshold: 15 }
 };
 
+
+// Ingredient categories for filtering
+const ING_CATEGORIES = {
+  coffee_g:     'main',
+  milk_ml:      'main',
+  ice_g:        'main',
+  chocolate_ml: 'syrups',
+  caramel_ml:   'syrups',
+  vanilla_ml:   'syrups',
+  condensed_ml: 'syrups',
+  small_cup:    'packaging',
+  medium_cup:   'packaging',
+  lid:          'packaging',
+  straw:        'packaging',
+  matcha_g:     'powders',
+  blue_g:       'powders',
+  sprite_ml:    'other',
+};
+
+function getIngCategory(key, meta) {
+  // Check built-in category map first
+  if (ING_CATEGORIES[key]) return ING_CATEGORIES[key];
+  // For custom ingredients, guess from unit
+  if (meta.unit === 'g' || meta.unit === 'kg') return 'powders';
+  if (meta.unit === 'ml' || meta.unit === 'L') return 'syrups';
+  if (meta.unit === 'pcs') return 'packaging';
+  return 'other';
+}
+
 // Returns built-in + user-added custom ingredients
 function getAllIngredients() {
   return { ...ING_META, ...(state ? (state.customIngredients || {}) : {}) };
@@ -1215,9 +1670,9 @@ function getAllIngredients() {
 
 // Actual confirmed stock as of now (all test sales already deducted)
 const FULL_STOCK = {
-  coffee_g: 1300, milk_ml: 4000, chocolate_ml: 1900, caramel_ml: 1700,
-  condensed_ml: 360, vanilla_ml: 670, ice_g: 5800,
-  small_cup: 29, medium_cup: 50, lid: 79, straw: 79
+  coffee_g: 0, milk_ml: 0, chocolate_ml: 0, caramel_ml: 0,
+  condensed_ml: 0, vanilla_ml: 0, ice_g: 0,
+  small_cup: 0, medium_cup: 0, lid: 0, straw: 0
 };
 
 // Sales already made (15 caramel latte small, 5 cafe mocha small, 1 spanish latte small)
@@ -1246,27 +1701,7 @@ function makeHistoricalOrders() {
   const pastDate = new Date(now);
   pastDate.setDate(pastDate.getDate() - 1); // yesterday
 
-  const testSales = [
-    { drinkId: 'caramel_latte', size: 'small', qty: 15 },
-    { drinkId: 'cafe_mocha', size: 'small', qty: 5 },
-    { drinkId: 'spanish_latte', size: 'small', qty: 1 }
-  ];
-
-  testSales.forEach(({ drinkId, size, qty }) => {
-    const drink = DRINKS.find(d => d.id === drinkId);
-    for (let i = 0; i < qty; i++) {
-      HISTORICAL_ORDERS.push({
-        id: 'hist_' + HISTORICAL_ORDERS.length,
-        drinkId,
-        drinkName: drink.name,
-        size,
-        price: drink.prices[size],
-        cost: drink.costs[size],
-        profit: drink.prices[size] - drink.costs[size],
-        timestamp: new Date(pastDate.getTime() - Math.random() * 3600000 * 6).toISOString()
-      });
-    }
-  });
+  // No pre-loaded test data — starting fresh
 }
 makeHistoricalOrders();
 
@@ -1339,14 +1774,37 @@ let state = {
 // ============================================================
 // FIREBASE CONFIG & INIT
 // ============================================================
-const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDQhnVgOZheYY-MKMJ5pMaVM1uIcPwINcU",
-  authDomain: "cornercup-727c5.firebaseapp.com",
-  projectId: "cornercup-727c5",
-  storageBucket: "cornercup-727c5.firebasestorage.app",
-  messagingSenderId: "520492903179",
-  appId: "1:520492903179:web:4f9ab6bfb5fb06505fd00e"
-};
+const isLocalhost =
+  location.hostname === "localhost" ||
+  location.hostname === "127.0.0.1" ||
+  location.protocol === "file:";
+
+const FIREBASE_CONFIG = isLocalhost
+  ? {
+      apiKey: "AIzaSyAURUtWCosrgE_2zUpEai8mLtGi2DQC430",
+      authDomain: "cornercuptesting.firebaseapp.com",
+      projectId: "cornercuptesting",
+      storageBucket: "cornercuptesting.firebasestorage.app",
+      messagingSenderId: "936872556278",
+      appId: "1:936872556278:web:9edcdd26e158f58eb51ed7"
+    }
+  : {
+      apiKey: "AIzaSyDQhnVgOZheYY-MKMJ5pMaVM1uIcPwINcU",
+      authDomain: "cornercup-727c5.firebaseapp.com",
+      projectId: "cornercup-727c5",
+      storageBucket: "cornercup-727c5.firebasestorage.app",
+      messagingSenderId: "520492903179",
+      appId: "1:520492903179:web:4f9ab6bfb5fb06505fd00e"
+    };
+//const FIREBASE_CONFIG = {
+//  apiKey: "AIzaSyDQhnVgOZheYY-MKMJ5pMaVM1uIcPwINcU",
+//  authDomain: "cornercup-727c5.firebaseapp.com",
+//  projectId: "cornercup-727c5",
+//  storageBucket: "cornercup-727c5.firebasestorage.app",
+//  messagingSenderId: "520492903179",
+//  appId: "1:520492903179:web:4f9ab6bfb5fb06505fd00e"
+//};
+console.log("Using project:", FIREBASE_CONFIG.projectId);
 
 // Firebase SDK loaded via CDN scripts
 let db = null;
@@ -1374,7 +1832,7 @@ async function loginUser(username, password) {
   // Simple hash compare (SHA-256 via Web Crypto)
   const hashed = await hashPassword(password);
   if (user.passwordHash !== hashed) return { error: 'Incorrect password.' };
-  return { ok: true, user: { id: doc.id, name: user.name, username: user.username, role: user.role } };
+  return { ok: true, user: { id: doc.id, name: user.name, username: user.username, role: user.role, superAdmin: user.superAdmin || false } };
 }
 
 async function hashPassword(password) {
@@ -1394,7 +1852,7 @@ async function ensureFirstAdmin() {
   }
 }
 
-async function createUser(name, username, password, role) {
+async function createUser(name, username, password, role, isSuperAdmin=false) {
   const existing = await db.collection('users')
     .where('username', '==', username.trim().toLowerCase()).get();
   if (!existing.empty) return { error: 'Username already taken.' };
@@ -1404,6 +1862,7 @@ async function createUser(name, username, password, role) {
     username: username.trim().toLowerCase(),
     passwordHash: hashed,
     role: role,
+    superAdmin: isSuperAdmin,
     createdAt: firebase.firestore.FieldValue.serverTimestamp()
   });
   return { ok: true, id: ref.id };
@@ -1518,7 +1977,7 @@ function startRealtimeListeners() {
       if (activePage === 'page-dashboard') renderDashboard();
       if (activePage === 'page-inventory') { renderInventory(); renderRestockHistory(); }
       if (activePage === 'page-cashier-sell') renderCashierSell();
-      if (activePage === 'page-sell') renderSell();
+      if (activePage === 'page-sell') { renderSell(); }
       if (activePage === 'page-checker') renderChecker();
     }, err => console.error('Config listener error:', err));
 
@@ -1530,59 +1989,18 @@ function startRealtimeListeners() {
       const activePage = document.querySelector('.page.active')?.id;
       if (activePage === 'page-dashboard') renderDashboard();
       if (activePage === 'page-reports') renderReports();
-      if (activePage === 'page-sell') renderTodayOrders();
+      if (activePage === 'page-sell') { renderTodayGrouped(); }
       if (activePage === 'page-cashier-sell') renderCashierSell();
     }, err => console.error('Orders listener error:', err));
 
   unsubscribeFns.push(configUnsub, ordersUnsub);
 }
 
-// Override executeSale to write order to Firestore subcollection
+// executeSaleFirebase — replaced by placeOrder() in new POS flow
 async function executeSaleFirebase() {
-  const ings = selectedDrink.ingredients[selectedSize];
-  for (const [k, v] of Object.entries(ings)) {
-    state.stock[k] = Math.max(0, (state.stock[k] || 0) - v);
-  }
-
-  const useCustom = document.getElementById('use-custom-date')?.checked;
-  const customDateVal = document.getElementById('sale-date')?.value;
-  const customTimeVal = document.getElementById('sale-time')?.value || '12:00';
-  let timestamp = new Date().toISOString();
-  if (useCustom && customDateVal) {
-    timestamp = new Date(customDateVal + 'T' + customTimeVal + ':00').toISOString();
-  }
-
-  const order = {
-    drinkId: selectedDrink.id,
-    drinkName: selectedDrink.name,
-    size: selectedSize,
-    price: selectedDrink.prices[selectedSize],
-    cost: selectedDrink.costs[selectedSize],
-    profit: selectedDrink.prices[selectedSize] - selectedDrink.costs[selectedSize],
-    timestamp,
-    recordedBy: currentUser?.username || 'unknown'
-  };
-
-  setSyncStatus('syncing');
-  try {
-    // Write order to subcollection
-    await db.collection('appData').doc('config').collection('orders').add(order);
-    // Update stock in config
-    await saveStateToFirebase();
-    setSyncStatus('ok');
-  } catch(e) {
-    setSyncStatus('error');
-    alert('Failed to save sale. Check your connection.');
-    return;
-  }
-
-  closeModal('confirm-modal');
-  selectedDrink = null;
-  const cb = document.getElementById('use-custom-date');
-  if (cb) { cb.checked = false; toggleCustomDate(); }
-  renderSell();
-  updateOrderPreview();
+  // No-op: The new placeOrder() function handles all Firebase writes
 }
+
 
 // Override deleteOrder to use Firestore
 async function deleteOrderFirebase(orderId, source) {
@@ -1643,18 +2061,35 @@ async function renderUsers() {
     el.innerHTML = '<div class="empty-state"><p>No users found</p></div>';
     return;
   }
-  el.innerHTML = users.map(u => `
+  el.innerHTML = users.map(u => {
+    const isMe = u.id === currentUser?.id;
+    const iAmSuperAdmin = currentUser?.superAdmin;
+    const targetIsSuperAdmin = u.superAdmin;
+    const targetIsAdmin = u.role === 'admin';
+
+    // Permission rules:
+    // SuperAdmin: can edit/delete anyone (including other admins), and edit own username
+    // Admin: can edit own account (all fields incl. username) + all cashier accounts
+    //        cannot edit/delete other admins or superadmin
+    // Cashier: cannot access this page at all
+    const canEdit = isMe || iAmSuperAdmin || (!targetIsAdmin && !targetIsSuperAdmin);
+    const canDelete = !isMe && (iAmSuperAdmin || (!targetIsAdmin && !targetIsSuperAdmin));
+
+    const superBadge = ''; // superAdmin status is hidden from UI
+    const roleBadge = `<span style="color:${u.role==='admin'?'var(--accent2)':'var(--green)'}">${u.role.toUpperCase()}</span>`;
+
+    return `
     <div class="user-card">
       <div>
-        <div class="uc-name">${u.name} ${u.id === currentUser?.id ? '<span class="md-tag">YOU</span>' : ''}</div>
-        <div class="uc-meta">@${u.username} · <span style="color:${u.role==='admin'?'var(--accent2)':'var(--green)'}">${u.role.toUpperCase()}</span></div>
+        <div class="uc-name">${u.name} ${isMe ? '<span class="md-tag">YOU</span>' : ''} ${superBadge}</div>
+        <div class="uc-meta">@${u.username} · ${roleBadge}</div>
       </div>
       <div style="display:flex;gap:8px;">
-        <button class="btn secondary sm" onclick="openEditUserModal('${u.id}','${u.name}','${u.username}','${u.role}')">Edit</button>
-        ${u.id !== currentUser?.id ? `<button class="btn danger sm" onclick="deleteUser('${u.id}','${u.name}')">Delete</button>` : ''}
+        ${canEdit ? `<button class="btn secondary sm" onclick="openEditUserModal('${u.id}','${u.name}','${u.username}','${u.role}')">Edit</button>` : `<span style="font-size:0.65rem;color:var(--text-faint);padding:5px 8px;">Protected</span>`}
+        ${canDelete ? `<button class="btn danger sm" onclick="deleteUser('${u.id}','${u.name}')" data-super="${u.superAdmin || false}">Delete</button>` : ''}
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 let editingUserId = null;
@@ -1667,6 +2102,7 @@ function openAddUserModal() {
   document.getElementById('nu-password').value = '';
   document.getElementById('nu-role').value = 'cashier';
   document.getElementById('nu-username').disabled = false;
+  document.getElementById('nu-role').disabled = false;
   document.getElementById('nu-password-group').style.display = 'block';
   document.getElementById('add-user-modal').classList.add('open');
 }
@@ -1677,10 +2113,23 @@ function openEditUserModal(id, name, username, role) {
   document.getElementById('save-user-btn').textContent = '✓ Save Changes';
   document.getElementById('nu-name').value = name;
   document.getElementById('nu-username').value = username;
-  document.getElementById('nu-username').disabled = true;
+  // Username is editable for own account, superAdmins editing anyone, or admins editing cashiers
+  const isOwnAccount = id === currentUser?.id;
+  const iAmSuperAdmin = currentUser?.superAdmin;
+  document.getElementById('nu-username').disabled = false; // always allow editing username
   document.getElementById('nu-password').value = '';
   document.getElementById('nu-password-group').style.display = 'block';
-  document.getElementById('nu-role').value = role;
+  // Role field: superAdmin can change anyone's role; admin can change cashier roles only
+  // Admins cannot promote cashiers to admin or change other admin's roles
+  const roleSelect = document.getElementById('nu-role');
+  roleSelect.value = role;
+  if (!iAmSuperAdmin && role === 'admin' && !isOwnAccount) {
+    roleSelect.disabled = true; // admin cannot change other admin's role
+  } else if (!iAmSuperAdmin && isOwnAccount) {
+    roleSelect.disabled = true; // admins cannot change their own role (prevent self-demotion)
+  } else {
+    roleSelect.disabled = false;
+  }
   document.getElementById('add-user-modal').classList.add('open');
 }
 
@@ -1697,9 +2146,47 @@ async function saveUser() {
   btn.disabled = true; btn.textContent = 'Saving...';
 
   if (editingUserId) {
+    const targetSnap = await db.collection('users').doc(editingUserId).get();
+    const targetUser = targetSnap.data();
+    const isOwnAccount = editingUserId === currentUser?.id;
+    const iAmSuperAdmin = currentUser?.superAdmin;
+
+    // Permission check
+    if (targetUser?.role === 'admin' && !iAmSuperAdmin && !isOwnAccount) {
+      alert('You cannot edit another admin account.');
+      btn.disabled = false; btn.textContent = '✓ Save Changes';
+      return;
+    }
+    // Prevent demoting superAdmin
+    if (targetUser?.superAdmin && role !== 'admin') {
+      alert('The first admin role cannot be changed.');
+      btn.disabled = false; btn.textContent = '✓ Save Changes';
+      return;
+    }
+    // Prevent admin from promoting cashier to admin
+    if (!iAmSuperAdmin && targetUser?.role === 'cashier' && role === 'admin') {
+      alert('Only the first admin can promote users to admin.');
+      btn.disabled = false; btn.textContent = '✓ Save Changes';
+      return;
+    }
+
     const updates = { name, role };
+    // Allow username change — check for conflicts
+    if (username && username !== targetUser?.username) {
+      const conflict = await db.collection('users').where('username', '==', username).get();
+      if (!conflict.empty) {
+        alert('Username "' + username + '" is already taken.');
+        btn.disabled = false; btn.textContent = '✓ Save Changes';
+        return;
+      }
+      updates.username = username;
+      // Update currentUser session if editing own account
+      if (isOwnAccount) currentUser.username = username;
+    }
     if (password.length >= 4) updates.passwordHash = await hashPassword(password);
     await db.collection('users').doc(editingUserId).update(updates);
+    // Update session name if editing own account
+    if (isOwnAccount) { currentUser.name = name; sessionStorage.setItem('cc_user', JSON.stringify(currentUser)); updateHeaderForRole(); }
   } else {
     const result = await createUser(name, username, password, role);
     if (result.error) { alert(result.error); btn.disabled = false; btn.textContent = '✓ Save User'; return; }
@@ -1711,6 +2198,11 @@ async function saveUser() {
 }
 
 async function deleteUser(id, name) {
+  // Get actual superAdmin status from Firestore to prevent spoofing
+  const snap = await db.collection('users').doc(id).get();
+  const targetUser = snap.data();
+  if (targetUser?.superAdmin && !currentUser?.superAdmin) { alert('You cannot delete this account.'); return; }
+  if (targetUser?.role === 'admin' && !currentUser?.superAdmin) { alert('You cannot delete an admin account.'); return; }
   if (!confirm(`Delete user "${name}"? They will no longer be able to log in.`)) return;
   await db.collection('users').doc(id).delete();
   renderUsers();
@@ -1806,10 +2298,14 @@ async function cashierConfirmSale() {
   for (const [k, v] of Object.entries(ings)) {
     state.stock[k] = Math.max(0, (state.stock[k] || 0) - v);
   }
+  const orderId = 'order_' + Date.now();
   const order = {
     drinkId: cashierSelectedDrink.id, drinkName: cashierSelectedDrink.name,
     size: cashierSelectedSize, price, cost, profit: price - cost,
-    timestamp: new Date().toISOString(), recordedBy: currentUser?.username || 'cashier'
+    timestamp: new Date().toISOString(),
+    customerName: 'Walk-in',
+    orderId,
+    recordedBy: currentUser?.username || 'cashier'
   };
   setSyncStatus('syncing');
   try {
@@ -1877,9 +2373,9 @@ async function doSetup() {
   const errEl = document.getElementById('setup-error');
   if (!name || !username || password.length < 4) { errEl.textContent = 'Fill in all fields. Password min 4 chars.'; errEl.style.display = 'block'; return; }
   btn.disabled = true; btn.textContent = 'Creating...';
-  const result = await createUser(name, username, password, 'admin');
+  const result = await createUser(name, username, password, 'admin', true);
   if (result.error) { errEl.textContent = result.error; errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Create Admin Account'; return; }
-  currentUser = { id: result.id, name, username, role: 'admin' };
+  currentUser = { id: result.id, name, username, role: 'admin', superAdmin: true };
   sessionStorage.setItem('cc_user', JSON.stringify(currentUser));
   await loadStateFromFirebase();
   showApp();
@@ -1922,6 +2418,7 @@ function updateHeaderForRole() {
 let selectedDrink = null;
 let selectedSize = 'small';
 let invFilter = 'all';
+let invCategoryFilter = 'all';
 let dateFilter = 'today';
 let drinkFilter = 'all';
 let editingIngKey = null;
@@ -1942,6 +2439,8 @@ function showPage(id) {
   if (id === 'sell') renderSell();
   if (id === 'checker') { renderChecker(); }
   if (id === 'manage') { renderManageDrinks(); }
+  if (id === 'testing') { renderTestingPage(); }
+  if (id === 'expenses') { renderExpensesPage(); }
   if (id === 'users') { renderUsers(); }
   if (id === 'cashier-sell') { renderCashierSell(); }
 }
@@ -1986,8 +2485,9 @@ function renderDashboard() {
       <tr>
         <td>${o.drinkName}</td>
         <td><span class="badge ok">${o.size}</span></td>
-        <td style="font-family:'DM Mono',monospace;color:var(--accent2)">₱${o.price}</td>
-        <td style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim)">${formatTime(o.timestamp)}</td>
+        <td style="color:var(--accent2)">₱${o.price}</td>
+        <td style="font-size:0.72rem;color:var(--text-dim)">${formatTime(o.timestamp)}</td>
+        <td style="font-size:0.68rem;color:var(--text-dim)">${o.recordedBy || '—'}</td>
         <td><button class="btn danger sm" onclick="deleteOrder('${o.id}', 'sell')" style="padding:3px 8px;font-size:0.6rem;">✕</button></td>
       </tr>
     `).join('');
@@ -2037,158 +2537,311 @@ function renderDashboard() {
 // ============================================================
 // SELL
 // ============================================================
-function renderSell() {
-  const grid = document.getElementById('drink-grid');
-  grid.innerHTML = getAllDrinks().map(d => `
-    <button class="drink-btn ${selectedDrink?.id === d.id ? 'selected' : ''}" onclick="selectDrink('${d.id}')">
-      <div style="font-size:1.3rem;margin-bottom:6px;">${d.emoji}</div>
-      <div class="drink-name">${d.name}</div>
-      <div class="drink-price">₱${d.prices.small} / ₱${d.prices.medium}</div>
-    </button>
-  `).join('');
-
-  updateOrderPreview();
-  renderTodayOrders();
-}
 
 function toggleCustomDate() {
-  const checked = document.getElementById('use-custom-date').checked;
+  const checked = document.getElementById('use-custom-date')?.checked;
   const row = document.getElementById('custom-date-row');
+  if (!row) return;
   row.style.display = checked ? 'flex' : 'none';
-  if (checked && !document.getElementById('sale-date').value) {
-    // Default to yesterday
+  if (checked && !document.getElementById('sale-date')?.value) {
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     document.getElementById('sale-date').value = yesterday.toISOString().split('T')[0];
+    document.getElementById('sale-time').value = '12:00';
   }
 }
 
-function selectDrink(id) {
-  selectedDrink = getAllDrinks().find(d => d.id === id);
-  renderSell();
+function renderSell() {
+  // Update header stats
+  const now = new Date();
+  const dateEl = document.getElementById('sell-date-label');
+  if (dateEl) dateEl.textContent = now.toLocaleDateString('en-PH', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+  const todayOrders = getOrdersByFilter('today');
+  const todayRev = todayOrders.reduce((s,o) => s+o.price, 0);
+  const countEl = document.getElementById('sell-today-count');
+  const revEl = document.getElementById('sell-today-revenue');
+  if (countEl) countEl.textContent = todayOrders.length;
+  if (revEl) revEl.textContent = '₱' + todayRev.toFixed(2);
+
+  // Render menu drink cards
+  const grid = document.getElementById('pos-drink-grid');
+  if (!grid) return;
+  grid.innerHTML = getAllDrinks().map(d => `
+    <div class="menu-drink-btn" onclick="openDrinkDetail('${d.id}')" title="Tap to see ingredients">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div class="mdb-emoji">${d.emoji}</div>
+          <div class="mdb-name">${d.name}</div>
+          <div class="mdb-price">S ₱${d.prices.small} · M ₱${d.prices.medium}</div>
+        </div>
+        <span style="font-size:0.6rem;color:var(--text-faint);margin-top:2px;">tap for ingredients</span>
+      </div>
+      <div class="size-quick" style="margin-top:10px;">
+        <button class="size-quick-btn" onclick="addToOrder('${d.id}','small');event.stopPropagation()">+ Small</button>
+        <button class="size-quick-btn" onclick="addToOrder('${d.id}','medium');event.stopPropagation()">+ Medium</button>
+      </div>
+    </div>
+  `).join('');
+
+  renderReceiptItems();
+  renderTodayGrouped();
 }
 
-function selectSize(size) {
-  selectedSize = size;
-  document.getElementById('btn-small').classList.toggle('active', size === 'small');
-  document.getElementById('btn-medium').classList.toggle('active', size === 'medium');
-  updateOrderPreview();
+// Current order state
+let currentOrder = []; // [{drinkId, drinkName, emoji, size, qty, price, cost}]
+
+function addToOrder(drinkId, size) {
+  const drink = getAllDrinks().find(d => d.id === drinkId);
+  if (!drink) return;
+
+  // Check if already in order — increment qty
+  const existing = currentOrder.find(i => i.drinkId === drinkId && i.size === size);
+  if (existing) {
+    existing.qty++;
+  } else {
+    currentOrder.push({
+      drinkId,
+      drinkName: drink.name,
+      emoji: drink.emoji,
+      size,
+      qty: 1,
+      price: drink.prices[size],
+      cost: drink.costs[size]
+    });
+  }
+  renderReceiptItems();
 }
 
-function updateOrderPreview() {
-  const preview = document.getElementById('order-preview');
-  const ingPreview = document.getElementById('ingredients-preview');
+function changeQty(drinkId, size, delta) {
+  const item = currentOrder.find(i => i.drinkId === drinkId && i.size === size);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) {
+    currentOrder = currentOrder.filter(i => !(i.drinkId === drinkId && i.size === size));
+  }
+  renderReceiptItems();
+}
 
-  if (!selectedDrink) {
-    preview.style.display = 'none';
-    ingPreview.innerHTML = '<div class="empty-state" style="padding:32px;"><div class="empty-icon">👆</div><p>Select a drink to see ingredients</p></div>';
+function removeFromOrder(drinkId, size) {
+  currentOrder = currentOrder.filter(i => !(i.drinkId === drinkId && i.size === size));
+  renderReceiptItems();
+}
+
+function clearOrder() {
+  currentOrder = [];
+  const nameEl = document.getElementById('customer-name');
+  if (nameEl) nameEl.value = '';
+  renderReceiptItems();
+}
+
+function renderReceiptItems() {
+  const container = document.getElementById('receipt-items');
+  const emptyEl = document.getElementById('receipt-empty');
+  const totalsEl = document.getElementById('receipt-totals');
+  const placeBtn = document.getElementById('place-order-btn');
+  if (!container) return;
+
+  if (currentOrder.length === 0) {
+    if (emptyEl) emptyEl.style.display = 'block';
+    if (totalsEl) totalsEl.style.display = 'none';
+    if (placeBtn) placeBtn.disabled = true;
+  const calcBtn = document.getElementById('calc-btn'); if (calcBtn) calcBtn.disabled = true;
+    // Clear item rows
+    Array.from(container.children).forEach(c => { if (c !== emptyEl) c.remove(); });
     return;
   }
 
-  const price = selectedDrink.prices[selectedSize];
-  const cost = selectedDrink.costs[selectedSize];
-  const profit = price - cost;
+  if (emptyEl) emptyEl.style.display = 'none';
+  if (totalsEl) totalsEl.style.display = 'block';
+  if (placeBtn) placeBtn.disabled = false;
+  const calcBtnEl = document.getElementById('calc-btn'); if (calcBtnEl) calcBtnEl.disabled = false;
 
-  preview.style.display = 'block';
-  document.getElementById('prev-drink').textContent = selectedDrink.name;
-  document.getElementById('prev-size').textContent = selectedSize.charAt(0).toUpperCase() + selectedSize.slice(1);
-  document.getElementById('prev-cost').textContent = '₱' + cost.toFixed(2);
-  document.getElementById('prev-price').textContent = '₱' + price.toFixed(2);
-  document.getElementById('prev-profit').textContent = '+₱' + profit.toFixed(2) + ' (' + ((profit/price)*100).toFixed(1) + '%)';
+  // Rebuild item rows
+  const existingRows = container.querySelectorAll('.receipt-item');
+  existingRows.forEach(r => r.remove());
 
-  const ings = selectedDrink.ingredients[selectedSize];
-  ingPreview.innerHTML = `<div class="table-wrap"><table>
-    <thead><tr><th>Ingredient</th><th>Amount</th><th>Stock After</th></tr></thead>
-    <tbody>
-      ${Object.entries(ings).map(([k,v]) => {
-        const meta = getAllIngredients()[k] || { name: k, unit: '', threshold: 0 };
-        const after = state.stock[k] - v;
-        const status = after <= meta.threshold * 0.5 ? 'red' : after <= meta.threshold ? 'yellow' : 'var(--text-dim)';
-        const extraNote = k === 'coffee_g' ? ` <span style="color:var(--text-faint);font-size:0.65rem">(≈${(v/BEANS_PER_ML).toFixed(0)}ml brewed)</span>`
-          : k === 'blue_g' ? ` <span style="color:var(--text-faint);font-size:0.65rem">(mix with warm water first)</span>`
-          : k === 'matcha_g' ? ` <span style="color:var(--text-faint);font-size:0.65rem">(mix with warm water first)</span>`
-          : '';
-        return `<tr>
-          <td>${meta.name}${extraNote}</td>
-          <td style="font-family:'DM Mono',monospace">${v.toFixed(2)} ${meta.unit}</td>
-          <td style="font-family:'DM Mono',monospace;color:${status}">${after.toFixed(1)} ${meta.unit}</td>
-        </tr>`;
-      }).join('')}
-    </tbody>
-  </table></div>`;
+  let totalPrice = 0, totalCost = 0, totalItems = 0;
+  currentOrder.forEach(item => {
+    totalPrice += item.price * item.qty;
+    totalCost += item.cost * item.qty;
+    totalItems += item.qty;
+
+    const row = document.createElement('div');
+    row.className = 'receipt-item';
+    row.innerHTML = `
+      <div class="ri-qty-ctrl">
+        <button class="ri-qty-btn" onclick="changeQty('${item.drinkId}','${item.size}',-1)">−</button>
+        <span class="ri-qty-num">${item.qty}</span>
+        <button class="ri-qty-btn" onclick="changeQty('${item.drinkId}','${item.size}',1)">+</button>
+      </div>
+      <div class="ri-name">${item.emoji} ${item.drinkName} <span class="ri-size">${item.size}</span></div>
+      <div class="ri-price">₱${(item.price * item.qty).toFixed(2)}</div>
+      <button class="ri-remove" onclick="removeFromOrder('${item.drinkId}','${item.size}')">✕</button>
+    `;
+    container.appendChild(row);
+  });
+
+  const profit = totalPrice - totalCost;
+  const sub = document.getElementById('r-subtotal');
+  const itm = document.getElementById('r-items');
+  const prf = document.getElementById('r-profit');
+  const tot = document.getElementById('r-total');
+  if (sub) sub.textContent = '₱' + totalPrice.toFixed(2);
+  if (itm) itm.textContent = totalItems + ' cup' + (totalItems !== 1 ? 's' : '');
+  if (prf) prf.textContent = '+₱' + profit.toFixed(2);
+  if (tot) tot.textContent = '₱' + totalPrice.toFixed(2);
 }
 
-function confirmSale() {
-  if (!selectedDrink) {
-    alert('Please select a drink first!');
-    return;
-  }
+async function placeOrder() {
+  if (currentOrder.length === 0) return;
 
-  const price = selectedDrink.prices[selectedSize];
-  const cost = selectedDrink.costs[selectedSize];
-  const profit = price - cost;
-  const ings = selectedDrink.ingredients[selectedSize];
-
-  // Check stock — also catch deleted/missing ingredients
-  for (const [k, v] of Object.entries(ings)) {
-    const meta = getAllIngredients()[k];
-    if (!meta) {
-      alert(`⚠️ Missing Ingredient!\n\n"${k}" has been deleted from your inventory but is still used in this drink.\n\nPlease go to Drinks → Edit "${selectedDrink.name}" and fix or remove this ingredient before selling.`);
-      return;
-    }
-    if ((state.stock[k] || 0) < v) {
-      alert(`Not enough ${meta.name}!\nCurrent stock: ${(state.stock[k]||0).toFixed(1)} ${meta.unit}, needed: ${v} ${meta.unit}`);
-      return;
+  // Stock check for all items
+  for (const item of currentOrder) {
+    const drink = getAllDrinks().find(d => d.id === item.drinkId);
+    if (!drink) { alert(`Drink "${item.drinkName}" no longer exists.`); return; }
+    const ings = drink.ingredients[item.size];
+    for (const [k, amt] of Object.entries(ings)) {
+      const meta = getAllIngredients()[k];
+      if (!meta) { alert(`⚠️ Missing ingredient in ${item.drinkName}. Ask admin to fix the recipe.`); return; }
+      const needed = amt * item.qty;
+      if ((state.stock[k] || 0) < needed) {
+        alert(`Not enough ${meta.name}!
+Need ${needed.toFixed(1)} ${meta.unit} for ${item.qty}× ${item.drinkName} (${item.size})
+Current stock: ${(state.stock[k]||0).toFixed(1)} ${meta.unit}`);
+        return;
+      }
     }
   }
 
+  const customerName = (document.getElementById('customer-name')?.value.trim()) || 'Walk-in';
   const useCustom = document.getElementById('use-custom-date')?.checked;
   const customDateVal = document.getElementById('sale-date')?.value;
   const customTimeVal = document.getElementById('sale-time')?.value || '12:00';
-  let dateLabel = 'Now';
-  if (useCustom && customDateVal) {
-    const d = new Date(customDateVal + 'T' + customTimeVal + ':00');
-    dateLabel = d.toLocaleDateString('en-PH', { weekday:'short', month:'short', day:'numeric' }) + ' at ' + d.toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit' });
+  let timestamp = new Date().toISOString();
+  if (useCustom && customDateVal && customDateVal.length > 0) {
+    const parsedDate = new Date(customDateVal + 'T' + customTimeVal + ':00');
+    if (!isNaN(parsedDate.getTime())) {
+      timestamp = parsedDate.toISOString();
+    }
   }
-  document.getElementById('confirm-details').innerHTML = `
-    <div class="order-preview">
-      <div class="order-row"><span>Drink</span><span>${selectedDrink.name} (${selectedSize})</span></div>
-      <div class="order-row"><span>Recording for</span><span style="font-family:'DM Mono',monospace;font-size:0.78rem;color:${useCustom?'var(--yellow)':'var(--text-dim)'}">${dateLabel}</span></div>
-      <div class="order-row"><span>Cost to Make</span><span>₱${cost.toFixed(2)}</span></div>
-      <div class="order-row total"><span>Revenue</span><span>₱${price.toFixed(2)}</span></div>
-      <div class="order-row profit"><span>Profit</span><span>+₱${profit.toFixed(2)}</span></div>
-    </div>
-  `;
 
-  document.getElementById('confirm-modal').classList.add('open');
-}
+  // Generate a shared orderId to group items together
+  const orderId = 'order_' + Date.now();
+  const totalItems = currentOrder.reduce((s,i) => s+i.qty, 0);
+  const totalPrice = currentOrder.reduce((s,i) => s+i.price*i.qty, 0);
 
-function executeSale() {
-  executeSaleFirebase();
-}
+  // Confirm
+  const lines = currentOrder.map(i => '  ' + i.qty + 'x ' + i.drinkName + ' (' + i.size + ') - P' + (i.price*i.qty).toFixed(2)).join('\n');
+  if (!confirm('Place order for ' + customerName + '?\n\n' + lines + '\n\nTotal: P' + totalPrice.toFixed(2))) return;
 
+  // Deduct stock for all items
+  for (const item of currentOrder) {
+    const drink = getAllDrinks().find(d => d.id === item.drinkId);
+    const ings = drink.ingredients[item.size];
+    for (const [k, amt] of Object.entries(ings)) {
+      state.stock[k] = Math.max(0, (state.stock[k] || 0) - amt * item.qty);
+    }
+  }
 
-
-function renderTodayOrders() {
-  const list = document.getElementById('today-order-list');
-  const todayOrders = getOrdersByFilter('today').reverse();
-  if (todayOrders.length === 0) {
-    list.innerHTML = '<div class="empty-state" style="padding:20px;"><p>No orders yet today</p></div>';
+  // Write each item as individual Firestore order doc (preserves all filters/reports)
+  // but all share the same orderId and customerName for grouping
+  setSyncStatus('syncing');
+  try {
+    const batch = db.batch();
+    currentOrder.forEach(item => {
+      for (let q = 0; q < item.qty; q++) {
+        const ref = db.collection('appData').doc('config').collection('orders').doc();
+        batch.set(ref, {
+          drinkId: item.drinkId,
+          drinkName: item.drinkName,
+          size: item.size,
+          price: item.price,
+          cost: item.cost,
+          profit: item.price - item.cost,
+          timestamp,
+          customerName,
+          orderId,
+          recordedBy: currentUser?.username || 'unknown'
+        });
+      }
+    });
+    await batch.commit();
+    await saveStateToFirebase();
+    setSyncStatus('ok');
+  } catch(e) {
+    console.error(e);
+    setSyncStatus('error');
+    alert('Failed to save order. Check your connection.');
     return;
   }
-  list.innerHTML = todayOrders.slice(0,10).map(o => `
-    <li class="order-item">
-      <div style="flex:1;">
-        <div class="oi-name">${o.drinkName} <span style="color:var(--text-dim);font-size:0.78rem">(${o.size})</span></div>
-        <div class="oi-time">${formatTime(o.timestamp)}</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;">
-        <div class="oi-price">₱${o.price}</div>
-        <button class="btn danger sm" onclick="deleteOrder('${o.id}', 'sell')" style="padding:3px 8px;font-size:0.6rem;">✕</button>
-      </div>
-    </li>
-  `).join('');
+
+  clearOrder();
+  renderSell();
 }
+
+function renderTodayGrouped() {
+  const container = document.getElementById('today-orders-grouped');
+  const summaryEl = document.getElementById('today-summary');
+  if (!container) return;
+  const todayOrders = getOrdersByFilter('today');
+  if (todayOrders.length === 0) {
+    container.innerHTML = '<div class="empty-state" style="padding:32px;"><div class="empty-icon">☕</div><p>No orders yet today</p></div>';
+    if (summaryEl) summaryEl.textContent = '';
+    return;
+  }
+
+  // Group by orderId (or timestamp+recordedBy for legacy orders)
+  const groups = {};
+  [...todayOrders].reverse().forEach(o => {
+    const key = o.orderId || (o.timestamp + '_' + (o.recordedBy||''));
+    if (!groups[key]) groups[key] = { orders: [], customerName: o.customerName || 'Walk-in', timestamp: o.timestamp, recordedBy: o.recordedBy, orderId: key };
+    groups[key].orders.push(o);
+  });
+
+  const totalRev = todayOrders.reduce((s,o) => s+o.price, 0);
+  const totalProfit = todayOrders.reduce((s,o) => s+o.profit, 0);
+  if (summaryEl) summaryEl.textContent = `${Object.keys(groups).length} order${Object.keys(groups).length!==1?'s':''} · ₱${totalRev.toFixed(2)} revenue · ₱${totalProfit.toFixed(2)} profit`;
+
+  container.innerHTML = Object.values(groups).map(g => {
+    const groupTotal = g.orders.reduce((s,o) => s+o.price, 0);
+    const groupProfit = g.orders.reduce((s,o) => s+o.profit, 0);
+    const itemsSummary = (() => {
+      const counts = {};
+      g.orders.forEach(o => { const k = o.drinkName+'('+o.size+')'; counts[k] = (counts[k]||0)+1; });
+      return Object.entries(counts).map(([k,v]) => v>1?`${v}× ${k}`:k).join(', ');
+    })();
+    return `
+    <div class="order-group">
+      <div class="order-group-header">
+        <div>
+          <div class="og-customer">👤 ${g.customerName}</div>
+          <div class="og-meta">${formatTime(g.timestamp)} · ${itemsSummary} · by ${g.recordedBy||'—'}</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="og-total">₱${groupTotal.toFixed(2)}</div>
+          <div style="font-size:0.65rem;color:var(--green);">+₱${groupProfit.toFixed(2)}</div>
+        </div>
+      </div>
+      <div class="og-items">
+        ${g.orders.map(o => `
+          <div class="og-item-row">
+            <span style="flex:1;">${o.drinkName} <span class="ri-size">${o.size}</span></span>
+            <span style="font-size:0.78rem;color:var(--accent2);">₱${o.price.toFixed(2)}</span>
+            <button class="btn danger sm" onclick="deleteOrder('${o.id}','sell')" style="padding:3px 8px;font-size:0.6rem;margin-left:8px;">✕</button>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Keep renderTodayOrders as alias for compatibility
+function renderTodayOrders() { renderTodayGrouped(); }
+
+// Stub out old functions that are no longer used
+function selectDrink(id) {}
+function selectSize(size) {}
+function updateOrderPreview() {}
+function confirmSale() {}
 
 // ============================================================
 // INVENTORY
@@ -2207,10 +2860,13 @@ function renderInventory() {
     const statusLow = ratio <= 1 && ratio > 0.5;
     const statusCritical = ratio <= 0.5;
 
-    if (invFilter === 'ok') return matchSearch && statusOk;
-    if (invFilter === 'low') return matchSearch && statusLow;
-    if (invFilter === 'critical') return matchSearch && statusCritical;
-    return matchSearch;
+    const category = getIngCategory(k, meta);
+    const matchCategory = invCategoryFilter === 'all' || category === invCategoryFilter;
+
+    if (invFilter === 'ok') return matchSearch && matchCategory && statusOk;
+    if (invFilter === 'low') return matchSearch && matchCategory && statusLow;
+    if (invFilter === 'critical') return matchSearch && matchCategory && statusCritical;
+    return matchSearch && matchCategory;
   });
 
   if (items.length === 0) {
@@ -2232,13 +2888,16 @@ function renderInventory() {
       <div class="inv-card-header">
         <div>
           <div class="inv-name">${meta.name}</div>
-          <div class="inv-supplier">📍 ${meta.supplier}</div>
+          <div class="inv-supplier">📍 ${meta.supplier}${meta.addedBy ? ` · <span style="color:var(--accent2)">Added by ${meta.addedBy}</span>` : ''}</div>
         </div>
-        <span class="badge ${badgeClass}">${badgeText}</span>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+          <span class="badge ${badgeClass}">${badgeText}</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--text-faint);">${({'main':'☕ Main','syrups':'🍮 Syrup','powders':'🧪 Powder','packaging':'📦 Packaging','other':'• Other'})[getIngCategory(k, meta)] || 'Other'}</span>
+        </div>
       </div>
       <div class="inv-qty">${v.toFixed(1)} <span class="inv-unit">${meta.unit}</span></div>
-      ${k === 'coffee_g' ? `<div style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--text-dim);margin-top:2px;">≈ ${Math.floor(v / 6.667)} small drinks / ${Math.floor(v / 10)} medium drinks</div>` : ''}
-      ${k === 'milk_ml' ? `<div style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--text-dim);margin-top:2px;">${(v/1000).toFixed(1)} cartons remaining</div>` : ''}
+      ${k === 'coffee_g' ? `<div style="font-size:0.68rem;color:var(--text-dim);margin-top:2px;">≈ ${Math.round(v / BEANS_PER_ML)}ml brewed · ${Math.floor(v / 6.667)} small / ${Math.floor(v / 10)} medium drinks</div>` : ''}
+      ${k === 'milk_ml' ? `<div style="font-size:0.68rem;color:var(--text-dim);margin-top:2px;">${(v/1000).toFixed(1)} cartons remaining</div>` : ''}
       <div class="stock-bar"><div class="stock-fill ${statusClass}" style="width:${pct}%"></div></div>
       <div class="inv-details">
         <span>Threshold: ${meta.threshold} ${meta.unit}</span>
@@ -2256,7 +2915,15 @@ function renderInventory() {
 
 function setFilter(f, el) {
   invFilter = f;
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  // Only deactivate status chips (not category chips)
+  document.querySelectorAll('#fc-all,#fc-ok,#fc-low,#fc-critical').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderInventory();
+}
+
+function setCategoryFilter(cat, el) {
+  invCategoryFilter = cat;
+  document.querySelectorAll('#cat-all,#cat-main,#cat-syrups,#cat-powders,#cat-packaging,#cat-other').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
   renderInventory();
 }
@@ -2284,38 +2951,78 @@ function quickRestock(key) {
 function updateRestockUnit() {
   const key = document.getElementById('restock-ing').value;
   document.getElementById('restock-unit-display').value = getAllIngredients()[key]?.unit || '';
+  updateRestockCostHint();
 }
 
-function doRestock() {
+function updateRestockCostHint() {
+  const key = document.getElementById('restock-ing').value;
+  const qty = parseFloat(document.getElementById('restock-qty').value) || 0;
+  const paid = parseFloat(document.getElementById('restock-price-paid').value) || 0;
+  const meta = getAllIngredients()[key];
+  const hint = document.getElementById('restock-cost-hint');
+  if (!hint || !meta) return;
+  if (qty > 0 && paid > 0) {
+    const perUnit = paid / qty;
+    hint.textContent = 'Cost per ' + meta.unit + ': P' + perUnit.toFixed(4) + ' (vs stored P' + meta.cost_per + ')';
+    hint.style.color = 'var(--accent2)';
+  } else {
+    hint.textContent = '';
+  }
+}
+
+async function doRestock() {
   const key = document.getElementById('restock-ing').value;
   const qty = parseFloat(document.getElementById('restock-qty').value);
+  const pricePaid = parseFloat(document.getElementById('restock-price-paid').value);
   if (!qty || qty <= 0) { alert('Enter a valid quantity'); return; }
+  if (isNaN(pricePaid) || pricePaid <= 0) { alert('Enter the total price you paid'); return; }
+
   state.stock[key] = (state.stock[key] || 0) + qty;
-  // Log the restock
-  if (!state.restockLog) state.restockLog = [];
   const meta = getAllIngredients()[key];
+  const timestamp = new Date().toISOString();
+  const addedBy = currentUser?.name || currentUser?.username || 'unknown';
+
+  // Log to local restock history
+  if (!state.restockLog) state.restockLog = [];
   state.restockLog.push({
     id: Date.now().toString(),
     key,
     name: meta.name,
     qty,
     unit: meta.unit,
-    estimatedCost: qty * meta.cost_per,
+    estimatedCost: pricePaid,
     supplier: meta.supplier,
-    timestamp: (() => {
-      const useCustom = document.getElementById('use-custom-date')?.checked;
-      if (useCustom) {
-        const d = document.getElementById('sale-date')?.value;
-        const t = document.getElementById('sale-time')?.value || '12:00';
-        if (d) return new Date(d + 'T' + t + ':00').toISOString();
-      }
-      return new Date().toISOString();
-    })()
+    addedBy,
+    timestamp
   });
-  saveState();
+
+  // Auto-log to Expenses as a Restock (deducts from Cost)
+  const expense = {
+    description: 'Restock: ' + meta.name + ' (' + qty + ' ' + meta.unit + ')',
+    amount: pricePaid,
+    category: 'restock',
+    deductFrom: 'cost',
+    date: timestamp.split('T')[0],
+    notes: 'Auto-logged from Inventory restock',
+    addedBy,
+    timestamp
+  };
+
+  setSyncStatus('syncing');
+  try {
+    await db.collection('appData').doc('config').collection('expenses').add(expense);
+    await saveStateToFirebase();
+    setSyncStatus('ok');
+  } catch(e) {
+    console.error(e);
+    setSyncStatus('error');
+    alert('Stock updated but failed to log expense. Check connection.');
+  }
+
   closeModal('restock-modal');
   renderInventory();
   document.getElementById('restock-qty').value = '';
+  document.getElementById('restock-price-paid').value = '';
 }
 
 function openEditModal(key) {
@@ -2395,8 +3102,39 @@ function renderReports() {
         <div class="bar-val" style="color:var(--green)">₱${val.toFixed(0)}</div>
       </div>`).join('');
 
-  // Order log — apply drink filter
-  const filteredOrders = drinkFilter === 'all' ? orders : orders.filter(o => o.drinkName === drinkFilter);
+  // ── Build order groups ──────────────────────────────────────────────────────
+  // Group by orderId, falling back to timestamp+recordedBy for legacy single orders
+  const allGroups = {};
+  [...orders].reverse().forEach(o => {
+    const key = o.orderId || (o.timestamp + '_' + (o.recordedBy || ''));
+    if (!allGroups[key]) {
+      allGroups[key] = {
+        key,
+        customerName: o.customerName || 'Walk-in',
+        timestamp: o.timestamp,
+        recordedBy: o.recordedBy || '—',
+        orders: []
+      };
+    }
+    allGroups[key].orders.push(o);
+  });
+
+  const allGroupsList = Object.values(allGroups);
+
+  // Apply drink filter at GROUP level — show group if any item matches
+  const filteredGroups = drinkFilter === 'all'
+    ? allGroupsList
+    : allGroupsList.filter(g => g.orders.some(o => o.drinkName === drinkFilter));
+
+  // Count unique orders vs items
+  const totalOrders = allGroupsList.length;
+  const totalItems = orders.length;
+  const filteredItems = filteredGroups.reduce((s,g) => s + g.orders.length, 0);
+
+  // Update orders stat card
+  document.getElementById('rep-orders').textContent = totalOrders;
+  const itemsEl = document.getElementById('rep-items');
+  if (itemsEl) itemsEl.textContent = totalItems + ' item' + (totalItems !== 1 ? 's' : '');
 
   // Update filter banner
   const banner = document.getElementById('drink-filter-banner');
@@ -2404,39 +3142,76 @@ function renderReports() {
   const logSummary = document.getElementById('log-summary');
   if (drinkFilter !== 'all') {
     banner.style.display = 'flex';
-    const fCount = filteredOrders.length;
-    const fRevenue = filteredOrders.reduce((s,o) => s + o.price, 0);
-    const fProfit = filteredOrders.reduce((s,o) => s + o.profit, 0);
-    bannerText.innerHTML = `Filtered by <strong style="color:var(--accent2)">${drinkFilter}</strong> — ${fCount} order${fCount !== 1 ? 's' : ''} · Revenue ₱${fRevenue.toFixed(2)} · Profit <span style="color:var(--green)">₱${fProfit.toFixed(2)}</span>`;
+    const fRevenue = filteredGroups.reduce((s,g) => s + g.orders.reduce((ss,o) => ss+o.price, 0), 0);
+    const fProfit = filteredGroups.reduce((s,g) => s + g.orders.reduce((ss,o) => ss+o.profit, 0), 0);
+    bannerText.innerHTML = `Filtered by <strong style="color:var(--accent2)">${drinkFilter}</strong> — ${filteredGroups.length} order${filteredGroups.length !== 1 ? 's' : ''} · ${filteredItems} items · Revenue ₱${fRevenue.toFixed(2)} · Profit <span style="color:var(--green)">₱${fProfit.toFixed(2)}</span>`;
   } else {
     banner.style.display = 'none';
   }
 
   // Summary line
   if (logSummary) {
-    const shown = filteredOrders.length;
-    const total = orders.length;
-    logSummary.textContent = drinkFilter === 'all'
-      ? `Showing all ${total} order${total !== 1 ? 's' : ''}`
-      : `Showing ${shown} of ${total} order${total !== 1 ? 's' : ''} (filtered)`;
+    if (drinkFilter === 'all') {
+      logSummary.textContent = totalOrders + ' order' + (totalOrders !== 1 ? 's' : '') + ' · ' + totalItems + ' item' + (totalItems !== 1 ? 's' : '');
+    } else {
+      logSummary.textContent = 'Showing ' + filteredGroups.length + ' of ' + totalOrders + ' orders containing ' + drinkFilter + ' (' + filteredItems + ' items shown)';
+    }
   }
 
-  const tbody = document.getElementById('report-tbody');
-  if (filteredOrders.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><p>' + (orders.length === 0 ? 'No orders in this period' : 'No ' + drinkFilter + ' orders in this period') + '</p></div></td></tr>';
+  // Render grouped log
+  const container = document.getElementById('report-orders-grouped');
+  if (!container) return;
+
+  if (filteredGroups.length === 0) {
+    container.innerHTML = '<div class="empty-state" style="padding:48px;"><div class="empty-icon">☕</div><p>' + (orders.length === 0 ? 'No orders in this period' : 'No orders containing ' + drinkFilter + ' in this period') + '</p></div>';
     return;
   }
-  tbody.innerHTML = [...filteredOrders].reverse().map(o => `
-    <tr>
-      <td style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text-dim)">${formatDateTime(o.timestamp)}</td>
-      <td>${o.drinkName}</td>
-      <td><span class="badge ok">${o.size}</span></td>
-      <td style="font-family:'DM Mono',monospace;color:var(--accent2)">₱${o.price.toFixed(2)}</td>
-      <td style="font-family:'DM Mono',monospace;color:var(--red)">₱${o.cost.toFixed(2)}</td>
-      <td style="font-family:'DM Mono',monospace;color:var(--green)">₱${o.profit.toFixed(2)}</td>
-      <td><button class="btn danger sm" onclick="deleteOrder('${o.id}', 'reports')" style="white-space:nowrap;">✕ Delete</button></td>
-    </tr>
-  `).join('');
+
+  container.innerHTML = filteredGroups.map(g => {
+    const groupTotal = g.orders.reduce((s,o) => s+o.price, 0);
+    const groupProfit = g.orders.reduce((s,o) => s+o.profit, 0);
+    const groupCost = g.orders.reduce((s,o) => s+o.cost, 0);
+
+    // When filtered, highlight matching items
+    const visibleOrders = drinkFilter === 'all'
+      ? g.orders
+      : g.orders; // show all items in group but highlight matching
+
+    const itemsSummary = (() => {
+      const counts = {};
+      g.orders.forEach(o => {
+        const k = o.drinkName + '(' + o.size + ')';
+        counts[k] = (counts[k] || 0) + 1;
+      });
+      return Object.entries(counts).map(([k,v]) => v > 1 ? v + 'x ' + k : k).join(', ');
+    })();
+
+    return '<div class="order-group">' +
+      '<div class="order-group-header">' +
+        '<div>' +
+          '<div class="og-customer">👤 ' + g.customerName + '</div>' +
+          '<div class="og-meta">' + formatDateTime(g.timestamp) + ' · by ' + g.recordedBy + '</div>' +
+          '<div class="og-meta" style="color:var(--text-dim);margin-top:2px;">' + itemsSummary + '</div>' +
+        '</div>' +
+        '<div style="text-align:right;">' +
+          '<div class="og-total">₱' + groupTotal.toFixed(2) + '</div>' +
+          '<div style="font-size:0.68rem;color:var(--green);">+₱' + groupProfit.toFixed(2) + ' profit</div>' +
+          '<div style="font-size:0.65rem;color:var(--text-faint);">cost ₱' + groupCost.toFixed(2) + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="og-items">' +
+        visibleOrders.map(o => {
+          const isMatch = drinkFilter !== 'all' && o.drinkName === drinkFilter;
+          return '<div class="og-item-row" data-order-id="' + o.id + '" style="' + (isMatch ? 'background:var(--accent-dim);' : '') + '">' +
+            '<span style="flex:1;">' + o.drinkName + ' <span class="ri-size">' + o.size + '</span></span>' +
+            '<span style="font-size:0.78rem;color:var(--accent2);">P' + o.price.toFixed(2) + '</span>' +
+            '<span style="font-size:0.68rem;color:var(--green);margin-left:8px;">+P' + o.profit.toFixed(2) + '</span>' +
+            '<button class="btn danger sm" data-id="' + o.id + '" data-src="reports" onclick="deleteOrder(this.dataset.id,this.dataset.src)" style="padding:3px 8px;font-size:0.6rem;margin-left:8px;">X</button>' +
+          '</div>';
+        }).join('') +
+      '</div>' +
+    '</div>';
+  }).join('');
 }
 
 function setDrinkFilter(drink, el) {
@@ -2474,16 +3249,21 @@ function setDateFilter(f) {
 
 function exportCSV() {
   const orders = getOrdersByFilter(dateFilter);
-  const header = 'Date,Time,Drink,Size,Revenue,Cost,Profit\n';
+  const header = 'Date,Time,Customer,OrderID,Drink,Size,Revenue,Cost,Profit,RecordedBy\n';
   const rows = orders.map(o => {
     const d = new Date(o.timestamp);
-    return `${d.toLocaleDateString()},${d.toLocaleTimeString()},${o.drinkName},${o.size},${o.price.toFixed(2)},${o.cost.toFixed(2)},${o.profit.toFixed(2)}`;
+    return d.toLocaleDateString() + ',' + d.toLocaleTimeString() + ',' +
+      (o.customerName || 'Walk-in') + ',' +
+      (o.orderId || 'legacy') + ',' +
+      o.drinkName + ',' + o.size + ',' +
+      o.price.toFixed(2) + ',' + o.cost.toFixed(2) + ',' + o.profit.toFixed(2) + ',' +
+      (o.recordedBy || '');
   }).join('\n');
   const blob = new Blob([header + rows], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `brewboss_${dateFilter}_${new Date().toISOString().split('T')[0]}.csv`;
+  a.download = 'cornercup_' + dateFilter + '_' + new Date().toISOString().split('T')[0] + '.csv';
   a.click();
 }
 
@@ -2633,12 +3413,13 @@ function renderChecker() {
     }
     const canMake = missing.length === 0;
     return `
-      <div class="checker-card ${canMake ? 'can-make' : 'cannot-make'}">
+      <div class="checker-card ${canMake ? 'can-make' : 'cannot-make'}" onclick="openCheckerDetail('${drink.id}')" style="cursor:pointer;" title="Click for ingredient details">
         <div style="font-size:1.4rem;margin-bottom:6px;">${drink.emoji}</div>
         <div class="ck-name">${drink.name}</div>
         <div class="ck-status">${canMake ? '✓ Can Make' : '✗ Cannot Make'}</div>
-        <div class="ck-count">Max possible: <strong>${maxCups}</strong> cups</div>
+        <div class="ck-count">Max possible: <strong>${maxCups === Infinity ? '999+' : maxCups}</strong> cups</div>
         ${!canMake ? '<div class="ck-missing">' + missing.map(m => '• ' + m).join('<br>') + '</div>' : ''}
+        <div style="font-size:0.6rem;color:var(--text-faint);margin-top:8px;">tap for details</div>
       </div>
     `;
   }).join('');
@@ -2661,6 +3442,608 @@ function renderDashboardChecker() {
   }).join('');
 }
 
+
+
+
+// ============================================================
+// CHANGE CALCULATOR
+// ============================================================
+function openCalc() {
+  const total = currentOrder.reduce((s,i) => s + i.price * i.qty, 0);
+  document.getElementById('calc-order-total').textContent = 'Order total: ₱' + total.toFixed(2);
+  document.getElementById('calc-paid').value = '';
+  document.getElementById('calc-result').style.display = 'none';
+  document.getElementById('calc-short').style.display = 'none';
+  document.getElementById('calc-modal').classList.add('open');
+  setTimeout(() => document.getElementById('calc-paid').focus(), 100);
+}
+
+function setCalcPaid(amount) {
+  const total = currentOrder.reduce((s,i) => s + i.price * i.qty, 0);
+  // If existing value + this button makes sense, add; otherwise set directly
+  const current = parseFloat(document.getElementById('calc-paid').value) || 0;
+  // If current is already >= total, replace; else accumulate
+  document.getElementById('calc-paid').value = current >= total ? amount : current + amount;
+  calcChange();
+}
+
+function calcChange() {
+  const total = currentOrder.reduce((s,i) => s + i.price * i.qty, 0);
+  const paid = parseFloat(document.getElementById('calc-paid').value) || 0;
+  const resultEl = document.getElementById('calc-result');
+  const shortEl = document.getElementById('calc-short');
+  const changeEl = document.getElementById('calc-change-amount');
+  const shortAmtEl = document.getElementById('calc-short-amount');
+
+  if (!paid || paid <= 0) {
+    resultEl.style.display = 'none';
+    shortEl.style.display = 'none';
+    return;
+  }
+
+  const change = paid - total;
+  if (change >= 0) {
+    resultEl.style.display = 'block';
+    shortEl.style.display = 'none';
+    changeEl.textContent = '₱' + change.toFixed(2);
+    changeEl.style.color = change === 0 ? 'var(--text-dim)' : 'var(--green)';
+  } else {
+    resultEl.style.display = 'none';
+    shortEl.style.display = 'block';
+    shortAmtEl.textContent = '₱' + Math.abs(change).toFixed(2);
+  }
+}
+
+
+// ============================================================
+// EXPENSES
+// ============================================================
+let expenseCategoryFilter = 'all';
+let expenseDateFilter = 'month';
+
+function setExpenseFilter(cat, el) {
+  expenseCategoryFilter = cat;
+  document.querySelectorAll('#exp-cat-all,#exp-cat-restock,#exp-cat-equipment,#exp-cat-utilities,#exp-cat-rent,#exp-cat-other')
+    .forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderExpensesPage();
+}
+
+function setExpenseDateFilter(f, el) {
+  expenseDateFilter = f;
+  document.querySelectorAll('#page-expenses .date-chip').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderExpensesPage();
+}
+
+function updateExpDeductHint() {
+  const cat = document.getElementById('exp-category')?.value;
+  const deduct = document.getElementById('exp-deduct-from')?.value;
+  const hint = document.getElementById('exp-deduct-hint');
+  if (!hint) return;
+  // Auto-suggest deductFrom based on category
+  if (cat === 'restock') {
+    document.getElementById('exp-deduct-from').value = 'cost';
+    hint.textContent = 'Paid from COGS fund — does NOT reduce your profit';
+    hint.style.color = 'var(--text-dim)';
+  } else {
+    document.getElementById('exp-deduct-from').value = 'profit';
+    hint.textContent = 'Paid from Gross Profit — reduces your net profit';
+    hint.style.color = 'var(--yellow)';
+  }
+}
+
+function openAddExpenseModal() {
+  document.getElementById('exp-modal-title').textContent = '+ Log Expense';
+  document.getElementById('exp-desc').value = '';
+  document.getElementById('exp-amount').value = '';
+  document.getElementById('exp-category').value = 'restock';
+  document.getElementById('exp-deduct-from').value = 'cost';
+  document.getElementById('exp-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('exp-notes').value = '';
+  updateExpDeductHint();
+  document.getElementById('add-expense-modal').classList.add('open');
+}
+
+async function saveExpense() {
+  const desc = document.getElementById('exp-desc').value.trim();
+  const amount = parseFloat(document.getElementById('exp-amount').value);
+  const category = document.getElementById('exp-category').value;
+  const date = document.getElementById('exp-date').value;
+  const notes = document.getElementById('exp-notes').value.trim();
+
+  if (!desc) { alert('Please enter a description.'); return; }
+  if (isNaN(amount) || amount <= 0) { alert('Please enter a valid amount.'); return; }
+  if (!date) { alert('Please select a date.'); return; }
+
+  const deductFrom = document.getElementById('exp-deduct-from').value;
+  const expense = {
+    description: desc,
+    amount,
+    category,
+    deductFrom,
+    date,
+    notes,
+    addedBy: currentUser?.username || 'unknown',
+    timestamp: new Date().toISOString()
+  };
+
+  setSyncStatus('syncing');
+  try {
+    await db.collection('appData').doc('config').collection('expenses').add(expense);
+    setSyncStatus('ok');
+    closeModal('add-expense-modal');
+    renderExpensesPage();
+  } catch(e) {
+    console.error(e);
+    setSyncStatus('error');
+    alert('Failed to save expense. Check your connection.');
+  }
+}
+
+async function deleteExpense(id) {
+  if (!confirm('Delete this expense? This cannot be undone.')) return;
+  setSyncStatus('syncing');
+  try {
+    await db.collection('appData').doc('config').collection('expenses').doc(id).delete();
+    setSyncStatus('ok');
+    renderExpensesPage();
+  } catch(e) {
+    setSyncStatus('error');
+    alert('Failed to delete. Check your connection.');
+  }
+}
+
+async function renderExpensesPage() {
+  const container = document.getElementById('expense-log-list');
+  if (!container) return;
+  container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem;padding:16px 0;">Loading...</div>';
+
+  try {
+    const snap = await db.collection('appData').doc('config')
+      .collection('expenses').orderBy('date', 'desc').get();
+
+    // ALL expenses (for stat cards — always all time)
+    const allExpenses = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+    // ALL orders — all time
+    const allOrders = getOrdersByFilter('all');
+    const allRevenue = allOrders.reduce((s,o) => s + o.price, 0);
+    const allCOGS = allOrders.reduce((s,o) => s + o.cost, 0);
+
+    // Split expenses:
+    // Restock (deductFrom='cost') → paid from COGS fund, does NOT touch profit
+    // Capital (deductFrom='profit') → paid from Gross Profit
+    const restockExpenses = allExpenses.filter(e => e.deductFrom === 'cost' || (!e.deductFrom && e.category === 'restock'));
+    const capitalExpenses = allExpenses.filter(e => e.deductFrom === 'profit' || (!e.deductFrom && e.category !== 'restock'));
+
+    const totalRestockSpending = restockExpenses.reduce((s,e) => s + e.amount, 0);
+    const totalCapitalSpending = capitalExpenses.reduce((s,e) => s + e.amount, 0);
+
+    // COGS fund balance = COGS earned - Restock spending (what's left to restock with)
+    const cogsFundBalance = allCOGS - totalRestockSpending;
+
+    // Gross Profit = Revenue - COGS (restocking does NOT change this)
+    const grossProfit = allRevenue - allCOGS;
+
+    // Net Profit = Gross Profit - Capital Expenses only
+    const netProfit = grossProfit - totalCapitalSpending;
+
+    const el = id => document.getElementById(id);
+    if (el('exp-revenue')) el('exp-revenue').textContent = 'P' + allRevenue.toFixed(2);
+    if (el('exp-cogs')) el('exp-cogs').textContent = 'P' + allCOGS.toFixed(2);
+    if (el('exp-gross')) el('exp-gross').textContent = 'P' + grossProfit.toFixed(2);
+
+    // COGS fund card
+    if (el('exp-fund-balance')) {
+      el('exp-fund-balance').textContent = 'P' + cogsFundBalance.toFixed(2);
+      el('exp-fund-balance').style.color = cogsFundBalance < 0 ? 'var(--red)' : cogsFundBalance < allCOGS * 0.2 ? 'var(--yellow)' : 'var(--green)';
+      const fundCard = el('exp-fund-card');
+      if (fundCard) {
+        if (cogsFundBalance < 0) {
+          fundCard.style.borderColor = 'var(--red)';
+          fundCard.style.background = 'var(--red-dim)';
+        } else if (cogsFundBalance < allCOGS * 0.2) {
+          fundCard.style.borderColor = 'var(--yellow)';
+          fundCard.style.background = 'var(--yellow-dim)';
+        } else {
+          fundCard.style.borderColor = 'var(--accent)';
+          fundCard.style.background = 'var(--surface)';
+        }
+      }
+    }
+    if (el('exp-fund-sub')) {
+      if (cogsFundBalance < 0) {
+        el('exp-fund-sub').textContent = 'WARNING: Spent P' + Math.abs(cogsFundBalance).toFixed(2) + ' more than COGS — dipped into capital!';
+        el('exp-fund-sub').style.color = 'var(--red)';
+      } else {
+        el('exp-fund-sub').textContent = 'COGS P' + allCOGS.toFixed(2) + ' - Restock P' + totalRestockSpending.toFixed(2) + ' = P' + cogsFundBalance.toFixed(2) + ' remaining';
+        el('exp-fund-sub').style.color = 'var(--text-dim)';
+      }
+    }
+    if (el('exp-restock-total')) el('exp-restock-total').textContent = 'P' + totalRestockSpending.toFixed(2);
+    if (el('exp-capital-total')) el('exp-capital-total').textContent = 'P' + totalCapitalSpending.toFixed(2);
+    if (el('exp-net')) {
+      el('exp-net').textContent = 'P' + netProfit.toFixed(2);
+      el('exp-net').style.color = netProfit >= 0 ? 'var(--green)' : 'var(--red)';
+    }
+
+    // Filter log for display (date + category filters apply here)
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfWeek = new Date(now); startOfWeek.setDate(now.getDate() - 7); startOfWeek.setHours(0,0,0,0);
+
+    let displayExpenses = allExpenses.filter(e => {
+      const d = new Date(e.date);
+      if (expenseDateFilter === 'month') return d >= startOfMonth;
+      if (expenseDateFilter === 'last_month') return d >= startOfLastMonth && d < endOfLastMonth;
+      if (expenseDateFilter === 'week') return d >= startOfWeek;
+      return true;
+    });
+    if (expenseCategoryFilter !== 'all') {
+      displayExpenses = displayExpenses.filter(e => e.category === expenseCategoryFilter);
+    }
+
+    if (displayExpenses.length === 0) {
+      container.innerHTML = '<div class="empty-state" style="padding:48px;"><div class="empty-icon">💰</div><p>No expenses recorded in this period</p></div>';
+      return;
+    }
+
+    const catEmoji = { restock:'🛒', equipment:'🔧', utilities:'💡', rent:'🏠', other:'•' };
+    const catLabel = { restock:'Restock', equipment:'Equipment', utilities:'Utilities', rent:'Rent', other:'Other' };
+
+    container.innerHTML = displayExpenses.map(e => {
+      const isRestock = e.deductFrom === 'cost' || e.category === 'restock';
+      const deductLabel = isRestock
+        ? '<span style="color:var(--text-dim);">→ deducted from Cost</span>'
+        : '<span style="color:var(--yellow);">→ deducted from Profit</span>';
+      return '<div class="order-group" style="margin-bottom:10px;">' +
+        '<div class="order-group-header">' +
+          '<div>' +
+            '<div class="og-customer">' + (catEmoji[e.category] || '•') + ' ' + e.description + '</div>' +
+            '<div class="og-meta">' + e.date + ' · ' + (catLabel[e.category] || 'Other') + ' · ' + deductLabel + ' · by ' + (e.addedBy || '-') + '</div>' +
+            (e.notes && e.notes !== 'Auto-logged from Inventory restock' ? '<div class="og-meta" style="color:var(--text-dim);">' + e.notes + '</div>' : '') +
+          '</div>' +
+          '<div style="display:flex;align-items:center;gap:12px;">' +
+            '<div style="text-align:right;">' +
+              '<div style="font-size:1rem;color:var(--red);">-P' + e.amount.toFixed(2) + '</div>' +
+              '<div style="font-size:0.65rem;color:var(--text-faint);">' + (isRestock ? 'cost' : 'profit') + '</div>' +
+            '</div>' +
+            '<button class="btn danger sm" data-id="' + e.id + '" onclick="deleteExpense(this.dataset.id)">Delete</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+  } catch(err) {
+    console.error('Expenses load error:', err);
+    container.innerHTML = '<div class="empty-state"><p>Could not load expenses. Check your connection.</p></div>';
+  }
+}
+
+// ============================================================
+// TESTING MODE
+// ============================================================
+let testOrder = []; // [{drinkId, drinkName, emoji, size, qty, cost}]
+
+function renderTestingPage() {
+  // Render menu
+  const grid = document.getElementById('test-drink-grid');
+  if (!grid) return;
+  grid.innerHTML = getAllDrinks().map(d => `
+    <div class="menu-drink-btn" onclick="openDrinkDetail('${d.id}')" title="Tap to see ingredients">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div class="mdb-emoji">${d.emoji}</div>
+          <div class="mdb-name">${d.name}</div>
+          <div class="mdb-price" style="color:var(--yellow);">Cost: ₱${d.costs.small.toFixed(2)} / ₱${d.costs.medium.toFixed(2)}</div>
+        </div>
+        <span style="font-size:0.6rem;color:var(--text-faint);margin-top:2px;">tap for info</span>
+      </div>
+      <div class="size-quick" style="margin-top:10px;">
+        <button class="size-quick-btn" onclick="addToTestOrder('${d.id}','small');event.stopPropagation()">+ Small</button>
+        <button class="size-quick-btn" onclick="addToTestOrder('${d.id}','medium');event.stopPropagation()">+ Medium</button>
+      </div>
+    </div>
+  `).join('');
+
+  renderTestReceiptItems();
+  renderTestLog();
+}
+
+function addToTestOrder(drinkId, size) {
+  const drink = getAllDrinks().find(d => d.id === drinkId);
+  if (!drink) return;
+  const existing = testOrder.find(i => i.drinkId === drinkId && i.size === size);
+  if (existing) { existing.qty++; }
+  else { testOrder.push({ drinkId, drinkName: drink.name, emoji: drink.emoji, size, qty: 1, cost: drink.costs[size] }); }
+  renderTestReceiptItems();
+}
+
+function changeTestQty(btn) {
+  const drinkId = btn.dataset.id;
+  const size = btn.dataset.size;
+  const delta = parseInt(btn.dataset.delta);
+  const item = testOrder.find(i => i.drinkId === drinkId && i.size === size);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) testOrder = testOrder.filter(i => !(i.drinkId === drinkId && i.size === size));
+  renderTestReceiptItems();
+}
+
+function removeFromTestOrder(btn) {
+  const drinkId = btn.dataset.id;
+  const size = btn.dataset.size;
+  testOrder = testOrder.filter(i => !(i.drinkId === drinkId && i.size === size));
+  renderTestReceiptItems();
+}
+
+function clearTestOrder() {
+  testOrder = [];
+  const el = document.getElementById('tester-name');
+  if (el) el.value = '';
+  renderTestReceiptItems();
+}
+
+function renderTestReceiptItems() {
+  const container = document.getElementById('test-receipt-items');
+  const emptyEl = document.getElementById('test-receipt-empty');
+  const totalsEl = document.getElementById('test-receipt-totals');
+  const placeBtn = document.getElementById('place-test-btn');
+  if (!container) return;
+
+  if (testOrder.length === 0) {
+    if (emptyEl) emptyEl.style.display = 'block';
+    if (totalsEl) totalsEl.style.display = 'none';
+    if (placeBtn) placeBtn.disabled = true;
+  const calcBtn = document.getElementById('calc-btn'); if (calcBtn) calcBtn.disabled = true;
+    container.querySelectorAll('.receipt-item').forEach(r => r.remove());
+    return;
+  }
+
+  if (emptyEl) emptyEl.style.display = 'none';
+  if (totalsEl) totalsEl.style.display = 'block';
+  if (placeBtn) placeBtn.disabled = false;
+  const calcBtnEl = document.getElementById('calc-btn'); if (calcBtnEl) calcBtnEl.disabled = false;
+
+  container.querySelectorAll('.receipt-item').forEach(r => r.remove());
+
+  let totalCost = 0, totalItems = 0;
+  testOrder.forEach(item => {
+    totalCost += item.cost * item.qty;
+    totalItems += item.qty;
+    const row = document.createElement('div');
+    row.className = 'receipt-item';
+    const dId = item.drinkId;
+    const dSz = item.size;
+    row.innerHTML =
+      '<div class="ri-qty-ctrl">' +
+        '<button class="ri-qty-btn" onclick="changeTestQty(this)" data-id="' + dId + '" data-size="' + dSz + '" data-delta="-1">-</button>' +
+        '<span class="ri-qty-num">' + item.qty + '</span>' +
+        '<button class="ri-qty-btn" onclick="changeTestQty(this)" data-id="' + dId + '" data-size="' + dSz + '" data-delta="1">+</button>' +
+      '</div>' +
+      '<div class="ri-name">' + item.emoji + ' ' + item.drinkName + ' <span class="ri-size">' + item.size + '</span></div>' +
+      '<div class="ri-price" style="color:var(--yellow);">P' + (item.cost * item.qty).toFixed(2) + '</div>' +
+      '<button class="ri-remove" onclick="removeFromTestOrder(this)" data-id="' + dId + '" data-size="' + dSz + '">x</button>';
+    container.appendChild(row);
+  });
+
+  const itemsEl = document.getElementById('t-items');
+  const costEl = document.getElementById('t-cost');
+  const totalEl = document.getElementById('t-total');
+  if (itemsEl) itemsEl.textContent = totalItems + ' cup' + (totalItems !== 1 ? 's' : '');
+  if (costEl) costEl.textContent = 'P' + totalCost.toFixed(2);
+  if (totalEl) totalEl.textContent = 'P' + totalCost.toFixed(2);
+}
+
+async function placeTestOrder() {
+  if (testOrder.length === 0) return;
+
+  // Stock check
+  for (const item of testOrder) {
+    const drink = getAllDrinks().find(d => d.id === item.drinkId);
+    if (!drink) { alert('Drink not found: ' + item.drinkName); return; }
+    const ings = drink.ingredients[item.size];
+    for (const [k, amt] of Object.entries(ings)) {
+      const meta = getAllIngredients()[k];
+      if (!meta) { alert('Missing ingredient in ' + item.drinkName + '. Ask admin to fix the recipe.'); return; }
+      const needed = amt * item.qty;
+      if ((state.stock[k] || 0) < needed) {
+        alert('Not enough ' + meta.name + '! Need ' + needed.toFixed(1) + ' ' + meta.unit + ' for ' + item.qty + 'x ' + item.drinkName + ' (' + item.size + '). Have: ' + (state.stock[k]||0).toFixed(1) + ' ' + meta.unit);
+        return;
+      }
+    }
+  }
+
+  const testerName = document.getElementById('tester-name')?.value.trim() || 'Unknown';
+  const totalCost = testOrder.reduce((s,i) => s + i.cost * i.qty, 0);
+  const totalItems = testOrder.reduce((s,i) => s + i.qty, 0);
+  const lines = testOrder.map(i => i.qty + 'x ' + i.drinkName + ' (' + i.size + ')').join(', ');
+
+  if (!confirm('Record test order for ' + testerName + '? ' + lines + ' | Ingredient cost: P' + totalCost.toFixed(2) + ' | Note: No revenue recorded.')) return;
+
+  // Deduct stock
+  for (const item of testOrder) {
+    const drink = getAllDrinks().find(d => d.id === item.drinkId);
+    const ings = drink.ingredients[item.size];
+    for (const [k, amt] of Object.entries(ings)) {
+      state.stock[k] = Math.max(0, (state.stock[k] || 0) - amt * item.qty);
+    }
+  }
+
+  // Save test log entry to Firestore (separate collection from orders)
+  const testEntry = {
+    testerName,
+    items: testOrder.map(i => ({ drinkId: i.drinkId, drinkName: i.drinkName, size: i.size, qty: i.qty, cost: i.cost })),
+    totalCost,
+    totalItems,
+    timestamp: new Date().toISOString(),
+    recordedBy: currentUser?.username || 'unknown'
+  };
+
+  setSyncStatus('syncing');
+  try {
+    await db.collection('appData').doc('config').collection('testLog').add(testEntry);
+    await saveStateToFirebase();
+    setSyncStatus('ok');
+  } catch(e) {
+    console.error(e);
+    setSyncStatus('error');
+    alert('Failed to save test log. Check your connection.');
+    return;
+  }
+
+  clearTestOrder();
+  renderTestingPage();
+}
+
+async function renderTestLog() {
+  const container = document.getElementById('test-log-list');
+  const summaryEl = document.getElementById('test-log-summary');
+  if (!container) return;
+
+  try {
+    const snap = await db.collection('appData').doc('config').collection('testLog')
+      .orderBy('timestamp', 'desc').limit(30).get();
+
+    if (snap.empty) {
+      container.innerHTML = '<div class="empty-state" style="padding:32px;"><div class="empty-icon">🧪</div><p>No test orders recorded yet</p></div>';
+      if (summaryEl) summaryEl.textContent = '';
+      return;
+    }
+
+    const entries = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const totalCost = entries.reduce((s,e) => s + (e.totalCost || 0), 0);
+    if (summaryEl) summaryEl.textContent = entries.length + ' test session' + (entries.length !== 1 ? 's' : '') + ' · P' + totalCost.toFixed(2) + ' total ingredient cost';
+
+    container.innerHTML = entries.map(e => {
+      const itemsSummary = (e.items || []).map(i => i.qty + 'x ' + i.drinkName + ' (' + i.size + ')').join(', ');
+      return '<div class="order-group">' +
+        '<div class="order-group-header">' +
+          '<div>' +
+            '<div class="og-customer">🧪 ' + (e.testerName || 'Unknown') + '</div>' +
+            '<div class="og-meta">' + formatDateTime(e.timestamp) + ' · ' + (e.totalItems || 0) + ' cups · by ' + (e.recordedBy || '-') + '</div>' +
+            '<div class="og-meta" style="color:var(--text-dim);margin-top:2px;">' + itemsSummary + '</div>' +
+          '</div>' +
+          '<div style="text-align:right;">' +
+            '<div style="font-size:0.82rem;color:var(--yellow);">P' + (e.totalCost || 0).toFixed(2) + '</div>' +
+            '<div style="font-size:0.65rem;color:var(--text-faint);">ingredient cost</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  } catch(err) {
+    console.error('Test log load error:', err);
+    container.innerHTML = '<div class="empty-state"><p>Could not load test log</p></div>';
+  }
+}
+
+
+// ============================================================
+// DRINK DETAIL MODAL
+// ============================================================
+let ddCurrentDrink = null;
+let ddCurrentSize = 'small';
+
+function openDrinkDetail(drinkId) {
+  ddCurrentDrink = getAllDrinks().find(d => d.id === drinkId);
+  if (!ddCurrentDrink) return;
+  ddCurrentSize = 'small';
+  document.getElementById('dd-emoji').textContent = ddCurrentDrink.emoji;
+  document.getElementById('dd-name').textContent = ddCurrentDrink.name;
+  document.getElementById('dd-prices').textContent = 'Small P' + ddCurrentDrink.prices.small + '  |  Medium P' + ddCurrentDrink.prices.medium;
+  showDDSize('small');
+  document.getElementById('drink-detail-modal').classList.add('open');
+}
+
+function showDDSize(size) {
+  ddCurrentSize = size;
+  document.getElementById('dd-tab-small').classList.toggle('active', size === 'small');
+  document.getElementById('dd-tab-medium').classList.toggle('active', size === 'medium');
+  if (!ddCurrentDrink) return;
+  const ings = ddCurrentDrink.ingredients[size];
+  const allIngs = getAllIngredients();
+  const cost = ddCurrentDrink.costs[size];
+  const price = ddCurrentDrink.prices[size];
+  document.getElementById('dd-cost').textContent = 'P' + cost.toFixed(2);
+  document.getElementById('dd-profit').textContent = '+P' + (price - cost).toFixed(2);
+  document.getElementById('dd-ingredients').innerHTML = Object.entries(ings).map(([k, amt]) => {
+    const meta = allIngs[k] || { name: k, unit: '', threshold: 0 };
+    const stock = state.stock[k] || 0;
+    const enough = stock >= amt;
+    const stockColor = stock <= meta.threshold * 0.5 ? 'var(--red)' : stock <= meta.threshold ? 'var(--yellow)' : 'var(--text-dim)';
+    const brewedNote = k === 'coffee_g' ? ' <span style="color:var(--text-faint);font-size:0.7em;">(= ' + Math.round(amt / BEANS_PER_ML) + 'ml brewed)</span>' : '';
+    return '<div class="ing-detail-row">' +
+      '<span class="ing-detail-name">' + meta.name + brewedNote + '</span>' +
+      '<span class="ing-detail-amount">' + amt + ' ' + meta.unit + '</span>' +
+      '<span class="ing-detail-stock" style="color:' + stockColor + '">' + (enough ? '' : '⚠ ') + 'Stock: ' + stock.toFixed(1) + ' ' + meta.unit + '</span>' +
+    '</div>';
+  }).join('');
+}
+
+function addToOrderFromModal(size) {
+  if (!ddCurrentDrink) return;
+  addToOrder(ddCurrentDrink.id, size);
+  closeModal('drink-detail-modal');
+}
+
+// ============================================================
+// CHECKER DETAIL MODAL
+// ============================================================
+let cdCurrentDrink = null;
+let cdCurrentSize = 'small';
+
+function openCheckerDetail(drinkId) {
+  cdCurrentDrink = getAllDrinks().find(d => d.id === drinkId);
+  if (!cdCurrentDrink) return;
+  cdCurrentSize = checkerSizeVal || 'small';
+  document.getElementById('cd-emoji').textContent = cdCurrentDrink.emoji;
+  document.getElementById('cd-name').textContent = cdCurrentDrink.name;
+  showCDSize(cdCurrentSize);
+  document.getElementById('checker-detail-modal').classList.add('open');
+}
+
+function showCDSize(size) {
+  cdCurrentSize = size;
+  document.getElementById('cd-tab-small').classList.toggle('active', size === 'small');
+  document.getElementById('cd-tab-medium').classList.toggle('active', size === 'medium');
+  if (!cdCurrentDrink) return;
+
+  const qty = parseInt(document.getElementById('checker-qty')?.value) || 1;
+  const ings = cdCurrentDrink.ingredients[size];
+  const allIngs = getAllIngredients();
+
+  let maxCups = Infinity;
+  let canMake = true;
+  Object.entries(ings).forEach(([k, amt]) => {
+    const avail = state.stock[k] || 0;
+    const possible = amt > 0 ? Math.floor(avail / amt) : 999;
+    if (possible < maxCups) maxCups = possible;
+    if (avail < amt * qty) canMake = false;
+  });
+  if (maxCups === Infinity) maxCups = 999;
+
+  document.getElementById('cd-status-badge').innerHTML = '<span class="badge ' + (canMake ? 'ok' : 'critical') + '">' + (canMake ? 'CAN MAKE ' + qty + ' CUP' + (qty!==1?'S':'') : 'CANNOT MAKE') + '</span>';
+  document.getElementById('cd-max').textContent = maxCups + ' cups';
+  document.getElementById('cd-price').textContent = 'P' + cdCurrentDrink.prices[size] + ' / cup';
+
+  document.getElementById('cd-ingredients').innerHTML = Object.entries(ings).map(([k, amt]) => {
+    const meta = allIngs[k] || { name: k, unit: '', threshold: 0 };
+    const avail = state.stock[k] || 0;
+    const needed = amt * qty;
+    const enough = avail >= needed;
+    const stockColor = !enough ? 'var(--red)' : avail <= meta.threshold ? 'var(--yellow)' : 'var(--green)';
+    const brewedNote = k === 'coffee_g' ? ' <span style="color:var(--text-faint);font-size:0.7em;">(= ' + Math.round(needed / BEANS_PER_ML) + 'ml brewed)</span>' : '';
+    return '<div class="ing-detail-row">' +
+      '<span class="ing-detail-name">' + meta.name + brewedNote + '</span>' +
+      '<span class="ing-detail-amount">Need: ' + needed.toFixed(1) + ' ' + meta.unit + '</span>' +
+      '<span class="ing-detail-stock" style="color:' + stockColor + '">' + (enough ? '✓' : '✗') + ' Have: ' + avail.toFixed(1) + ' ' + meta.unit + '</span>' +
+    '</div>';
+  }).join('');
+}
+
 // ============================================================
 // RESTOCK HISTORY
 // ============================================================
@@ -2676,7 +4059,7 @@ function renderRestockHistory() {
     <div class="rh-entry">
       <div>
         <div class="rh-name">+${r.qty} ${r.unit} ${r.name}</div>
-        <div class="rh-meta">${formatDateTime(r.timestamp)} · ${r.supplier}</div>
+        <div class="rh-meta">${formatDateTime(r.timestamp)} · ${r.supplier} · <span style="color:var(--accent2)">by ${r.addedBy || 'unknown'}</span></div>
       </div>
       <div class="rh-cost">~₱${r.estimatedCost.toFixed(2)}</div>
     </div>
@@ -2720,20 +4103,20 @@ function openEOD() {
       ${todayOrders.length === 0
         ? '<div style="color:var(--text-dim);font-size:0.85rem;padding:8px 0;">No sales recorded today.</div>'
         : Object.entries(byDrink).sort((a,b)=>b[1].count-a[1].count).map(([name,d]) =>
-            `<div class="eod-row"><span>${name}</span><span style="font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--text-dim)">${d.count} cup${d.count!==1?'s':''}</span><span style="font-family:'DM Mono',monospace;color:var(--accent2)">₱${d.revenue.toFixed(2)}</span></div>`
+            `<div class="eod-row"><span>${name}</span><span style="font-size:0.78rem;color:var(--text-dim)">${d.count} cup${d.count!==1?'s':''}</span><span style="color:var(--accent2)">₱${d.revenue.toFixed(2)}</span></div>`
           ).join('')
       }
     </div>
     <div class="eod-section">
       <h4>Financial Summary</h4>
-      <div class="eod-row"><span>Total Revenue</span><span style="font-family:'DM Mono',monospace;color:var(--accent2)">₱${revenue.toFixed(2)}</span></div>
-      <div class="eod-row"><span>Total Cost</span><span style="font-family:'DM Mono',monospace;color:var(--red)">₱${cost.toFixed(2)}</span></div>
+      <div class="eod-row"><span>Total Revenue</span><span style="color:var(--accent2)">₱${revenue.toFixed(2)}</span></div>
+      <div class="eod-row"><span>Total Cost</span><span style="color:var(--red)">₱${cost.toFixed(2)}</span></div>
       <div class="eod-total"><span>Net Profit</span><span style="color:var(--green)">₱${profit.toFixed(2)}</span></div>
     </div>
     ${lowItems.length > 0 ? `
     <div class="eod-section" style="margin-top:16px;">
       <h4>⚠️ Restock Before Tomorrow</h4>
-      ${lowItems.map(([k,v]) => { const _m=getAllIngredients()[k]; return `<div class="eod-row"><span>${_m?.name||k}</span><span style="font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--yellow)">${v.toFixed(1)} ${_m?.unit||''} left</span><span class="supplier-tag">${_m?.supplier||''}</span></div>`; }).join('')}
+      ${lowItems.map(([k,v]) => { const _m=getAllIngredients()[k]; return `<div class="eod-row"><span>${_m?.name||k}</span><span style="font-size:0.75rem;color:var(--yellow)">${v.toFixed(1)} ${_m?.unit||''} left</span><span class="supplier-tag">${_m?.supplier||''}</span></div>`; }).join('')}
     </div>` : `
     <div style="background:var(--green-dim);border:1px solid var(--green);border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.85rem;color:var(--green);">
       ✓ All stock levels are good — you're ready for tomorrow!
@@ -2875,7 +4258,7 @@ function saveIngredient() {
     // Generate a safe key from name
     const key = 'custom_' + name.toLowerCase().replace(/[^a-z0-9]/g,'_') + '_' + Date.now().toString().slice(-4);
     if (!state.customIngredients) state.customIngredients = {};
-    state.customIngredients[key] = { name, unit, cost_per: cost, supplier, threshold };
+    state.customIngredients[key] = { name, unit, cost_per: cost, supplier, threshold, addedBy: currentUser?.name || currentUser?.username || 'unknown', addedAt: new Date().toISOString() };
     state.stock[key] = stock;
   }
 
@@ -2930,7 +4313,7 @@ function renderManageDrinks() {
     <div class="manage-drink-card ${isCustom?'custom-drink':''}">
       <div style="flex:1;">
         <div class="md-name">${d.emoji} ${d.name} ${isCustom?'<span class="md-tag">CUSTOM</span>':''}</div>
-        <div class="md-prices">Small ₱${d.prices.small} · Medium ₱${d.prices.medium} &nbsp;|&nbsp; Cost: ₱${d.costs.small.toFixed(2)} / ₱${d.costs.medium.toFixed(2)}</div>
+        <div class="md-prices">Small ₱${d.prices.small} · Medium ₱${d.prices.medium} &nbsp;|&nbsp; Cost: ₱${d.costs.small.toFixed(2)} / ₱${d.costs.medium.toFixed(2)}${d.addedBy ? ` &nbsp;|&nbsp; <span style="color:var(--accent2)">Added by ${d.addedBy}</span>` : ''}</div>
         <div class="md-ings"><strong>Small:</strong> ${smallIngs}</div>
         <div class="md-ings"><strong>Medium:</strong> ${medIngs}</div>
       </div>
@@ -3061,7 +4444,9 @@ function saveDrink() {
     id, name, emoji,
     prices: { small: priceSmall, medium: priceMed },
     costs:  { small: smallCost, medium: medCost },
-    ingredients: { small: smallIngs, medium: medIngs }
+    ingredients: { small: smallIngs, medium: medIngs },
+    addedBy: editingDrinkId ? undefined : (currentUser?.name || currentUser?.username || 'unknown'),
+    addedAt: editingDrinkId ? undefined : new Date().toISOString()
   };
 
   if (editingDrinkId) {
