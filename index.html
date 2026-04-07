@@ -1774,36 +1774,36 @@ let state = {
 // ============================================================
 // FIREBASE CONFIG & INIT
 // ============================================================
-const isLocalhost =
-  location.hostname === "localhost" ||
-  location.hostname === "127.0.0.1" ||
-  location.protocol === "file:";
+// const isLocalhost =
+//   location.hostname === "localhost" ||
+//   location.hostname === "127.0.0.1" ||
+//   location.protocol === "file:";
 
-const FIREBASE_CONFIG = isLocalhost
-  ? {
-      apiKey: "AIzaSyAURUtWCosrgE_2zUpEai8mLtGi2DQC430",
-      authDomain: "cornercuptesting.firebaseapp.com",
-      projectId: "cornercuptesting",
-      storageBucket: "cornercuptesting.firebasestorage.app",
-      messagingSenderId: "936872556278",
-      appId: "1:936872556278:web:9edcdd26e158f58eb51ed7"
-    }
-  : {
-      apiKey: "AIzaSyDQhnVgOZheYY-MKMJ5pMaVM1uIcPwINcU",
-      authDomain: "cornercup-727c5.firebaseapp.com",
-      projectId: "cornercup-727c5",
-      storageBucket: "cornercup-727c5.firebasestorage.app",
-      messagingSenderId: "520492903179",
-      appId: "1:520492903179:web:4f9ab6bfb5fb06505fd00e"
-    };
-//const FIREBASE_CONFIG = {
-//  apiKey: "AIzaSyDQhnVgOZheYY-MKMJ5pMaVM1uIcPwINcU",
-//  authDomain: "cornercup-727c5.firebaseapp.com",
-//  projectId: "cornercup-727c5",
-//  storageBucket: "cornercup-727c5.firebasestorage.app",
-//  messagingSenderId: "520492903179",
-//  appId: "1:520492903179:web:4f9ab6bfb5fb06505fd00e"
-//};
+// const FIREBASE_CONFIG = isLocalhost
+//   ? {
+//       apiKey: "AIzaSyAURUtWCosrgE_2zUpEai8mLtGi2DQC430",
+//       authDomain: "cornercuptesting.firebaseapp.com",
+//       projectId: "cornercuptesting",
+//       storageBucket: "cornercuptesting.firebasestorage.app",
+//       messagingSenderId: "936872556278",
+//       appId: "1:936872556278:web:9edcdd26e158f58eb51ed7"
+//     }
+//   : {
+//       apiKey: "AIzaSyDQhnVgOZheYY-MKMJ5pMaVM1uIcPwINcU",
+//       authDomain: "cornercup-727c5.firebaseapp.com",
+//       projectId: "cornercup-727c5",
+//       storageBucket: "cornercup-727c5.firebasestorage.app",
+//       messagingSenderId: "520492903179",
+//       appId: "1:520492903179:web:4f9ab6bfb5fb06505fd00e"
+//     };
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAURUtWCosrgE_2zUpEai8mLtGi2DQC430",
+  authDomain: "cornercuptesting.firebaseapp.com",
+  projectId: "cornercuptesting",
+  storageBucket: "cornercuptesting.firebasestorage.app",
+  messagingSenderId: "936872556278",
+  appId: "1:936872556278:web:9edcdd26e158f58eb51ed7"
+}
 console.log("Using project:", FIREBASE_CONFIG.projectId);
 
 // Firebase SDK loaded via CDN scripts
